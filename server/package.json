@@ -1,0 +1,19 @@
+{
+  "name": "remember-your-childhood",
+  "version": "1.0.0",
+  "description": "Project to help nostalgic people remember childhood series, films and animations.",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucas-sdalmeida/remember-your-childhood.git"
+  },
+  "author": "lucas-sdalmeida",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucas-sdalmeida/remember-your-childhood/issues"
+  },
+  "homepage": "https://github.com/lucas-sdalmeida/remember-your-childhood#readme"
+}
