@@ -3,7 +3,7 @@ import Username from "./username";
 
 export default class User {
     constructor (
-        private readonly id: UserId,
-        private readonly username: Username,
+        public readonly id: UserId,
+        public readonly username: Username,
     ) {}
 }
