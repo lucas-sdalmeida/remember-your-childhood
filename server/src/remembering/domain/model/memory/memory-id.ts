@@ -1,5 +1,12 @@
 import { UUID } from "../../../../util/types";
+import { Identifier } from "../../util";
 
-type MemoryId = UUID
+export default class MemoryId extends Identifier {
+    constructor (
+        private readonly value: UUID
+    ) { super() }
 
-export default MemoryId
+    toString() {
+        return this.value
+    }
+}

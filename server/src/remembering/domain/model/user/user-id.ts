@@ -1,5 +1,12 @@
 import { UUID } from "../../../../util/types"
+import { Identifier } from "../../util";
 
-type UserId = UUID
+export default class UserId extends Identifier {
+    constructor(
+        private readonly value: UUID,
+    ) { super() }
 
-export default UserId
+    toString() {
+        return this.value
+    }
+}

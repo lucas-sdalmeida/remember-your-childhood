@@ -1,18 +1,20 @@
+import { Entity } from "../../util";
 import MemoryId from "./memory-id";
 import Moment from "./moment";
 import Rating from "./rating";
 import { Subject } from "./subject";
 
-export default class Memory {
+export default class Memory extends Entity<MemoryId> {
     private readonly _moments: Moment[] 
 
     constructor(
-        public readonly id: MemoryId,
+        id: MemoryId,
         public subject: Subject,
         public nostalgyLevel: Rating,
         public affectionLevel: Rating,
         moments: Moment[] = [],
     ) {
+        super(id)
         this._moments = moments
     }
 
@@ -32,10 +34,5 @@ export default class Memory {
 
     get moments() {
         return this._moments.slice()
-    }
-
-    equals(other: any) {
-        if (!other || !(other instanceof Memory)) return false
-        return other.id == this.id
     }
 }
