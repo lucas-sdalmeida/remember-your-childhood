@@ -1,25 +1,32 @@
 import { Notification } from "../../../../util/types"
 
 export default class Rating {
-    private readonly value: number
-    constructor (
-        value: number
-    ) {
-        this.value = Math.trunc(value)
-        
-        const notification = this.validate()
+    private constructor (
+        private readonly value: number
+    ) {}
+
+    static ofPercentage(value: number) {
+        value = Math.trunc(value)
+
+        const notification = this.validate(value)
         if (notification.hasErrors()) throw new Error(notification.message)
+
+        return new Rating(value)
     }
 
-    private validate() {
+    private static validate(value: number) {
         const notification = new Notification()
 
-        if (this.value < 0)
-            notification.addError(`A rating cannot be a negative number. Provided: ${this.value}`)
-        if (this.value > 100)
-            notification.addError(`A rating cannot exceed 100%. Provided: ${this.value}`)
+        if (value < 0)
+            notification.addError(`A rating cannot be a negative number. Provided: ${value}`)
+        if (value > 100)
+            notification.addError(`A rating cannot exceed 100%. Provided: ${value}`)
 
         return notification
+    }
+
+    static ofDecimal(value: number) {
+        return this.ofPercentage(value * 100)
     }
 
     toString() {
