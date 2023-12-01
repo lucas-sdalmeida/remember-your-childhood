@@ -10,7 +10,7 @@ export default interface UserRepository {
 
     delete(id: UUID): void
 
-    existsById(id: UUID): void
+    existsById(id: UUID): boolean
 
-    existsByUsername(username: string): void
+    existsByUsername(username: string): boolean
 }
