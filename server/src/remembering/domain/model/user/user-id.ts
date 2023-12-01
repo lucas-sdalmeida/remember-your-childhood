@@ -3,7 +3,7 @@ import { Identifier } from "../../util";
 
 export default class UserId extends Identifier {
     constructor(
-        private readonly value: UUID,
+        public readonly value: UUID,
     ) { super() }
 
     toString() {
