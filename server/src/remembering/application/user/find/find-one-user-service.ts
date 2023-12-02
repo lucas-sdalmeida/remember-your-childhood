@@ -1,4 +1,4 @@
-import { Credentials } from "../../../../auth";
+import Credentials from "../shared/credentials";
 import { UUID } from "../../../../util/types";
 import ResponseModel from "./response-model";
 

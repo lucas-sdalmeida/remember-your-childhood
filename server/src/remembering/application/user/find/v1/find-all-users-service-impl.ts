@@ -1,4 +1,5 @@
-import { AuthenticatorService, Credentials } from "../../../../../auth";
+import { AuthenticatorService } from "../../auth";
+import Credentials from "../../shared/credentials";
 import { UserRepository } from "../../repository";
 import FindAllUsersService from "../find-all-users-service";
 import ResponseModel from "../response-model";

@@ -1,7 +1,7 @@
-import { UserDTO } from "../repository"
+import { UserAccountDTO } from "../repository"
 
 type ResponseModel = {
-    user: UserDTO,
+    user: UserAccountDTO,
 }
 
 export default ResponseModel

@@ -1,8 +1,7 @@
-import { AuthenticatorService, Credentials } from "../../../../../auth";
+import { AuthenticatorService } from "../../auth";
+import Credentials from "../../shared/credentials";
 import { UUID } from "../../../../../util/types";
-import { UserId } from "../../../../domain/model/user";
 import { UserRepository } from "../../repository";
-import { userFromDTO } from "../../repository/user-dto";
 import FindOneUserService from "../find-one-user-service";
 import ResponseModel from "../response-model";
 
