@@ -1,19 +1,19 @@
-import UserId from "../../user/user-id";
+import UserAccountId from "../../user/user-id";
 
 export default abstract class Visibility {
     constructor (
-        protected readonly owner: UserId
+        protected readonly owner: UserAccountId
     ) {}
 
-    isAllowedToSee(user: UserId) {
+    isAllowedToSee(user: UserAccountId) {
         return user == this.owner || this.allowsToSee(user)
     }
 
-    protected abstract allowsToSee(user: UserId): boolean
+    protected abstract allowsToSee(user: UserAccountId): boolean
 
-    abstract grantPermissionToSee(user: UserId): Visibility
+    abstract grantPermissionToSee(user: UserAccountId): Visibility
 
-    abstract denyPermissionToSee(user: UserId): Visibility
+    abstract denyPermissionToSee(user: UserAccountId): Visibility
 
     abstract toString(): string
 }
