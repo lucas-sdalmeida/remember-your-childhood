@@ -1,5 +1,5 @@
 import { CreateUserService, RequestModel } from "../../../user/create";
-import Credentials, { createCredentials } from "../../../user/shared/credentials";
+import Credentials, { createCredentials } from "../../shared/credentials";
 import SignUpService from "../signup-service";
 
 export default class SignUpServideImpl implements SignUpService {

@@ -1,5 +1,5 @@
-import { AuthenticatorService } from "../../auth";
-import Credentials from "../../shared/credentials";
+import { AuthenticatorService } from "../../../session/auth";
+import Credentials from "../../../session/shared/credentials";
 import { UUID } from "../../../../../util/types";
 import { UserRepository } from "../../repository";
 import FindOneUserService from "../find-one-user-service";

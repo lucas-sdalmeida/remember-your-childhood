@@ -1,5 +1,5 @@
-import Credentials from "../../../../../remembering/application/user/shared/credentials";
-import { UserRepository } from "../../repository";
+import Credentials from "../../shared/credentials";
+import { UserRepository } from "../../../user/repository";
 import AuthenticationError from "../authentication-error";
 import AuthenticatorService from "../authenticator-service";
 

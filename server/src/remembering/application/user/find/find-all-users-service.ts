@@ -1,4 +1,4 @@
-import Credentials from "../shared/credentials";
+import Credentials from "../../session/shared/credentials";
 import ResponseModel from "./response-model";
 
 export default interface FindAllUsersService {

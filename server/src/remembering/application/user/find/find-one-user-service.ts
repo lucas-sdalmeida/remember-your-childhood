@@ -1,4 +1,4 @@
-import Credentials from "../shared/credentials";
+import Credentials from "../../session/shared/credentials";
 import { UUID } from "../../../../util/types";
 import ResponseModel from "./response-model";
 
