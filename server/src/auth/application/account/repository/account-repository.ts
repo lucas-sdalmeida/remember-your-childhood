@@ -13,4 +13,6 @@ export default interface AccountRepository {
     existsById(id: UUID): boolean
 
     existsByEmail(email: string): boolean
+
+    existsByIdAndUserId(id: UUID, userId: UUID): boolean
 }
