@@ -1,29 +1,24 @@
 import { UUID } from "../../../../util/types"
-import { User, UserId, Username } from "../../../domain/model/user"
+import { UserAccount } from "../../../domain/model/user"
 
-type UserDTO = {
+type UserAccountDTO = {
     id: UUID,
     username: string,
+    email: string,
+    password: string,
     followingList: UUID[],
     blockList: UUID[],
 }
 
-export const userToDTO = (user: User): UserDTO => {
+export const userToDTO = (user: UserAccount): UserAccountDTO => {
     return {
         id: user.id.value,
         username: user.username.toString(),
+        email: user.email.toString(),
+        password: user.password.toString(),
         followingList: user.followingList.map(u => u.value),
         blockList: user.blockList.map(u => u.value),
     }
 }
 
-export const userFromDTO = (dto: UserDTO): User => {
-    return new User(
-        new UserId(dto.id),
-        Username.of(dto.username),
-        dto.followingList.map(f => new UserId(f)),
-        dto.blockList.map(f => new UserId(f)),
-    )
-}
-
-export default UserDTO
+export default UserAccountDTO
