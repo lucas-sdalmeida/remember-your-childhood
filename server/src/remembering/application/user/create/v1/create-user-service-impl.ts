@@ -1,18 +1,16 @@
-import Email from "../../../../domain/model/user/email";
 import { RawPassword } from "../../../../domain/model/user/password";
 import { PasswordEncrypter, UUIDGenerator } from "../../../../domain/services";
 import { UserRepository, userToDTO } from "../../repository";
-import Credentials, { createCredentials } from "../../shared/credentials";
-import SignUpService, { RequestModel, userFromRequestModel } from "../signup-service";
+import CreateUserService, { RequestModel, ResponseModel, userFromRequestModel } from "../create-user-service";
 
-export default class SignUpServiceImpl implements SignUpService {
+export default class CreateUserServiceImpl implements CreateUserService {
     constructor (
         private readonly userRepository: UserRepository,
         private readonly uuidGenerator: UUIDGenerator,
         private readonly passwordEncrypter: PasswordEncrypter,
     ) {}
 
-    create(model: RequestModel): Credentials {
+    create(model: RequestModel): ResponseModel {
         if (this.userRepository.existsByEmail(model.email))
             throw new Error(`There already is a account with that uses the email: ${model.email}`)
         if (this.userRepository.existsByUsername(model.username))
@@ -24,6 +22,6 @@ export default class SignUpServiceImpl implements SignUpService {
         const user = userFromRequestModel(id, password, model)
 
         this.userRepository.create(userToDTO(user))
-        return createCredentials(id)
+        return { id: id }
     }
 }

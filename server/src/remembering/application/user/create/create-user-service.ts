@@ -2,16 +2,19 @@ import { UUID } from "../../../../util/types"
 import { UserAccount, UserAccountId, Username } from "../../../domain/model/user"
 import Email from "../../../domain/model/user/email"
 import { EncryptedPassword } from "../../../domain/model/user/password"
-import Credentials from "../shared/credentials"
 
-export default interface SignUpService {
-    create(model: RequestModel): Credentials
+export default interface CreateUserService {
+    create(model: RequestModel): ResponseModel
 }
 
 export type RequestModel = {
     username: string,
     email: string,
     password: string
+}
+
+export type ResponseModel = {
+    id: UUID,
 }
 
 export const userFromRequestModel = (id: UUID, password: EncryptedPassword, model: RequestModel) => { 

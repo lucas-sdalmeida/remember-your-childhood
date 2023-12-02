@@ -1,4 +1,4 @@
-import { SignUpService, RequestModel as SignUpRequestModel } from "./application/user/signup";
+import { CreateUserService, RequestModel as CreateUserRequestModel } from "./application/user/create";
 import { UUIDGenerator } from "./domain/services";
 
-export { SignUpService, SignUpRequestModel, UUIDGenerator }
+export { CreateUserService, CreateUserRequestModel, UUIDGenerator }
