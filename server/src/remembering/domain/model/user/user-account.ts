@@ -1,33 +1,37 @@
 import { Entity } from "../../util";
-import UserId from "./user-id";
+import Email from "./email";
+import { EncryptedPassword } from "./password";
+import UserAccountId from "./user-account-id";
 import Username from "./username";
 
-export default class User extends Entity<UserId> {
-    private readonly _followingList: UserId[]
-    private readonly _blockList: UserId[]
+export default class UserAccount extends Entity<UserAccountId> {
+    private readonly _followingList: UserAccountId[]
+    private readonly _blockList: UserAccountId[]
 
     constructor (
-        id: UserId,
+        id: UserAccountId,
         public readonly username: Username,
-        followingList: UserId[] = [],
-        blockList: UserId[] = [],
+        public readonly email: Email,
+        public readonly password: EncryptedPassword,
+        followingList: UserAccountId[] = [],
+        blockList: UserAccountId[] = [],
     ) {
         super(id)
         this._followingList = followingList
         this._blockList = blockList
     }
 
-    follow(user: UserId) {
+    follow(user: UserAccountId) {
         if (this._blockList.includes(user)) throw new Error(`Unable to follow a User that is blocked! Provided: ${user}`)
         if (this.isFollowing(user)) return
         this._followingList.push(user)
     }
 
-    isFollowing(user: UserId) {
+    isFollowing(user: UserAccountId) {
         return this._followingList.includes(user)
     }
 
-    unfollow(user: UserId) {
+    unfollow(user: UserAccountId) {
         const userIndex = this._followingList.indexOf(user)
         if (userIndex == -1) throw new Error(`Unable to unfollow a user that has never been followed! Provided: ${user}`)
         this._followingList.splice(userIndex, 1)
@@ -37,13 +41,13 @@ export default class User extends Entity<UserId> {
         return this._followingList.slice()
     }
 
-    block(user: UserId) {
+    block(user: UserAccountId) {
         if (this.hasBlocked(user)) return
         if (this._followingList.includes(user)) this.unfollow(user)
         this._blockList.push(user)
     }
 
-    hasBlocked(user: UserId) {
+    hasBlocked(user: UserAccountId) {
         return this._blockList.includes(user)
     }
 

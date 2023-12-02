@@ -1,17 +1,17 @@
-import { UserId } from "../../user";
+import { UserAccountId } from "../../user";
 import Visibility from "./visibility";
 
 export default class BlockedMemory extends Visibility {
     constructor (
-        owner: UserId,
-        private readonly blockedUsers: UserId[],
+        owner: UserAccountId,
+        private readonly blockedUsers: UserAccountId[],
     ) { super(owner) }
 
-    protected allowsToSee(user: UserId) {
+    protected allowsToSee(user: UserAccountId) {
         return !this.blockedUsers.includes(user)
     }
 
-    grantPermissionToSee(user: UserId) {
+    grantPermissionToSee(user: UserAccountId) {
         const userIndex = this.blockedUsers.indexOf(user)
         
         if (userIndex == -1) return this
@@ -20,7 +20,7 @@ export default class BlockedMemory extends Visibility {
         return this
     }
 
-    denyPermissionToSee(user: UserId) {
+    denyPermissionToSee(user: UserAccountId) {
         if (!this.allowsToSee(user)) return this
         this.blockedUsers.push(user)
         return this

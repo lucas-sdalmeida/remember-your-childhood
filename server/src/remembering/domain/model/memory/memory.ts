@@ -1,5 +1,5 @@
 import { Entity } from "../../util";
-import { UserId } from "../user";
+import { UserAccountId } from "../user";
 import MemoryId from "./memory-id";
 import Moment from "./moment";
 import Rating from "./rating";
@@ -12,7 +12,7 @@ export default class Memory extends Entity<MemoryId> {
 
     constructor(
         id: MemoryId,
-        public readonly ownerId: UserId,
+        public readonly ownerId: UserAccountId,
         public subject: Subject,
         public nostalgyLevel: Rating,
         public affectionLevel: Rating,
@@ -46,12 +46,12 @@ export default class Memory extends Entity<MemoryId> {
         this._visibility = new PrivateMemory(this.ownerId)
     }
 
-    grantPermissionToSee(user: UserId, ...others: UserId[]) {
+    grantPermissionToSee(user: UserAccountId, ...others: UserAccountId[]) {
         this._visibility = this._visibility.grantPermissionToSee(user)
         others.forEach(u => this._visibility.grantPermissionToSee(u))
     }
 
-    revokePermissionToSee(user: UserId, ...others: UserId[]) {
+    revokePermissionToSee(user: UserAccountId, ...others: UserAccountId[]) {
         this._visibility = this._visibility.denyPermissionToSee(user)
         others.forEach(u => this._visibility.denyPermissionToSee(u))
     }

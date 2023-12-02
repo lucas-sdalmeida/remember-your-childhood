@@ -1,6 +1,6 @@
 import { Notification } from "../../../../util/types";
 import { Entity } from "../../util";
-import { UserId } from "../user";
+import { UserAccountId } from "../user";
 import FollowRequestId from "./request-id";
 import RequestStatus from "./request-status";
 
@@ -11,8 +11,8 @@ export default class FollowRequest extends Entity<FollowRequestId> {
 
     private constructor (
         id: FollowRequestId,
-        public readonly requester: UserId,
-        public readonly receiver: UserId,
+        public readonly requester: UserAccountId,
+        public readonly receiver: UserAccountId,
         status: RequestStatus = 'PENDING',
         requestDate = new Date(),
         answerDate?: Date,
@@ -22,11 +22,11 @@ export default class FollowRequest extends Entity<FollowRequestId> {
         this._requestDate = requestDate
     }
 
-    static createRequest(id: FollowRequestId, requester: UserId, receiver: UserId) {
+    static createRequest(id: FollowRequestId, requester: UserAccountId, receiver: UserAccountId) {
         return new FollowRequest(id, requester, receiver)
     }
 
-    static existentRequest(id: FollowRequestId, requester: UserId, receiver: UserId, status: RequestStatus, 
+    static existentRequest(id: FollowRequestId, requester: UserAccountId, receiver: UserAccountId, status: RequestStatus, 
                             requestDate: Date, answerDate?: Date) {
         const notification = FollowRequest.validate(status, requestDate, answerDate);
         

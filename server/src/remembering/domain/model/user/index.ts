@@ -1,5 +1,5 @@
-import UserId from "./user-id";
+import UserAccountId from "./user-account-id";
 import Username from "./username";
-import User from "./user";
+import UserAccount from "./user-account";
 
-export { UserId, User, Username }
+export { UserAccountId, UserAccount, Username }

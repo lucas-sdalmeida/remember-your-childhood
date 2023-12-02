@@ -1,4 +1,4 @@
-import UserAccountId from "../../user/user-id";
+import UserAccountId from "../../user/user-account-id";
 
 export default abstract class Visibility {
     constructor (

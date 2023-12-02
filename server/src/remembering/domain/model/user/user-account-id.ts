@@ -1,7 +1,7 @@
 import { UUID } from "../../../../util/types"
 import { Identifier } from "../../util";
 
-export default class UserId extends Identifier {
+export default class UserAccountId extends Identifier {
     constructor(
         public readonly value: UUID,
     ) { super() }
