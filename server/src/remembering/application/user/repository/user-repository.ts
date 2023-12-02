@@ -19,4 +19,6 @@ export default interface UserRepository {
     existsById(id: UUID): boolean
 
     existsByUsername(username: string): boolean
+
+    existsByEmail(email: string): boolean
 }
