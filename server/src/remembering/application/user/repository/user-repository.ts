@@ -4,9 +4,15 @@ import UserDTO from "./user-dto";
 export default interface UserRepository {
     create(user: UserDTO): void
 
-    findById(id: UUID): void
+    findById(id: UUID): UserDTO | undefined
 
-    findByUsername(username: string): void
+    findByIdIfHasNotBlocked(id: UUID, blocked: UUID): UserDTO | undefined
+
+    findByUsername(username: string): UserDTO | undefined
+
+    findAll(): UserDTO[]
+
+    findAllThatHasNotBlocked(blocked: UUID): UserDTO[]
 
     delete(id: UUID): void
 

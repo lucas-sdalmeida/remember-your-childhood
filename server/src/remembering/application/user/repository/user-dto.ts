@@ -1,5 +1,5 @@
 import { UUID } from "../../../../util/types"
-import { User } from "../../../domain/model/user"
+import { User, UserId, Username } from "../../../domain/model/user"
 
 type UserDTO = {
     id: UUID,
@@ -15,6 +15,15 @@ export const userToDTO = (user: User): UserDTO => {
         followingList: user.followingList.map(u => u.value),
         blockList: user.blockList.map(u => u.value),
     }
+}
+
+export const userFromDTO = (dto: UserDTO): User => {
+    return new User(
+        new UserId(dto.id),
+        Username.of(dto.username),
+        dto.followingList.map(f => new UserId(f)),
+        dto.blockList.map(f => new UserId(f)),
+    )
 }
 
 export default UserDTO
