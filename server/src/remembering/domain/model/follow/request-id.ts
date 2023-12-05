@@ -3,7 +3,7 @@ import { Identifier } from "../../util";
 
 export default class FollowRequestId extends Identifier {
     constructor (
-        private readonly value: UUID,
+        readonly value: number,
     ) { super() }
 
     toString() {
