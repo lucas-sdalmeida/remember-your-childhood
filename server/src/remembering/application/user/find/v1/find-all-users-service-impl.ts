@@ -13,6 +13,14 @@ export default class FindAllUsersServiceImpl implements FindAllUsersService {
     findAll(credentials: Credentials): ResponseModel[] {
         this.authenticator.authenticate(credentials)
         return this.userRepository.findAllThatHasNotBlocked(credentials.userId)
-            .map(dto => { return { user: dto } })
+            .map(dto => { return { 
+                user: { 
+                    id: dto.id,
+                    username: dto.username,
+                    email: dto.email,
+                    followingList: dto.followingList,
+                    blockList: dto.blockList
+                } 
+            }})
     }
 }
