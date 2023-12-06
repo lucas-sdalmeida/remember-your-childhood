@@ -1,7 +1,7 @@
 import { UUID } from "../../../../../util/types";
 import { FollowRequest, FollowRequestId } from "../../../../domain/model/follow";
 import { UserAccountId } from "../../../../domain/model/user";
-import { NumericIdGenerator, PasswordRetriver } from "../../../../domain/services";
+import { NumericIdGenerator, PasswordRetriever } from "../../../../domain/services";
 import { AuthenticatorService } from "../../../session/auth";
 import Credentials from "../../../session/shared/credentials";
 import { UserRepository } from "../../../user/repository";
@@ -15,7 +15,7 @@ export default class FollowRequestServiceImpl implements FollowRequestService {
         private readonly userRepository: UserRepository,
         private readonly followRequestRepository: FollowRequestRepository,
         private readonly numericIdGenerator: NumericIdGenerator,
-        private readonly passwordRetriever: PasswordRetriver,
+        private readonly passwordRetriever: PasswordRetriever,
         private readonly authenticatorService: AuthenticatorService,
     ) {}
     
@@ -46,7 +46,7 @@ export default class FollowRequestServiceImpl implements FollowRequestService {
 
     private isAlreadyFollowing(requester: UUID, receiver: UUID): boolean {
         const dto = this.userRepository.findById(requester)!!
-        const requesterAccount = userFromDTO(dto, this.passwordRetriever.retrieve(dto.password))
+        const requesterAccount = userFromDTO(dto, this.passwordRetriever)
         return requesterAccount.isFollowing(new UserAccountId(receiver))
     }
 

@@ -1,6 +1,6 @@
 import { UUID } from "../../../../../util/types";
 import { FollowRequest } from "../../../../domain/model/follow";
-import { PasswordRetriver } from "../../../../domain/services";
+import { PasswordRetriever } from "../../../../domain/services";
 import { AuthenticatorService } from "../../../session/auth";
 import Credentials from "../../../session/shared/credentials";
 import { UserRepository } from "../../../user/repository";
@@ -13,7 +13,7 @@ export default class AsnwerRequestServiceImpl implements AnswerRequestService {
     constructor (
         private readonly followRequestRepository: FollowRequestRepository,
         private readonly userRepository: UserRepository,
-        private readonly passwordRetriver: PasswordRetriver,
+        private readonly passwordRetriever: PasswordRetriever,
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
@@ -44,7 +44,7 @@ export default class AsnwerRequestServiceImpl implements AnswerRequestService {
 
     private findRequester(requesterId: UUID) {
         const dto = this.userRepository.findById(requesterId)!!
-        return userFromDTO(dto,  this.passwordRetriver.retrieve(dto.password))
+        return userFromDTO(dto,  this.passwordRetriever)
     }
 
     refuse(requestId: UUID, credentials: Credentials): void {

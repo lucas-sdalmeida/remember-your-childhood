@@ -1,6 +1,6 @@
 import { UUID } from "../../../../../util/types";
 import { UserAccount, UserAccountId } from "../../../../domain/model/user";
-import { PasswordRetriver } from "../../../../domain/services";
+import { PasswordRetriever } from "../../../../domain/services";
 import { AuthenticatorService } from "../../../session/auth";
 import Credentials from "../../../session/shared/credentials";
 import { UserRepository } from "../../../user/repository";
@@ -13,7 +13,7 @@ export default class UnfollowServiceImpl implements UnfollowService {
     constructor (
         private readonly userRepository: UserRepository,
         private readonly followRequestRepository: FollowRequestRepository,
-        private readonly passwordRetriver: PasswordRetriver,
+        private readonly passwordRetriever: PasswordRetriever,
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
@@ -36,7 +36,7 @@ export default class UnfollowServiceImpl implements UnfollowService {
 
     private findRequester(requesterId: UUID, unfollowingUserId: UserAccountId): UserAccount {
         const requesterDto = this.userRepository.findById(requesterId)!!
-        const requester = userFromDTO(requesterDto, this.passwordRetriver.retrieve(requesterDto.password))
+        const requester = userFromDTO(requesterDto, this.passwordRetriever)
         
         if (!requester.isFollowing(unfollowingUserId))
             throw new Error(`The user with id ${requesterId.toString()} is not following the user with id ${unfollowingUserId.toString()}`)

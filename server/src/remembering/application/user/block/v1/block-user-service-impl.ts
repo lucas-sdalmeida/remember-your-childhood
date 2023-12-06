@@ -1,5 +1,5 @@
 import { UUID } from "../../../../../util/types";
-import { PasswordRetriver } from "../../../../domain/services";
+import { PasswordRetriever } from "../../../../domain/services";
 import { AuthenticatorService } from "../../../session/auth";
 import Credentials from "../../../session/shared/credentials";
 import { UserRepository } from "../../repository";
@@ -9,7 +9,7 @@ import BlockUserService from "../block-user-service";
 export default class BlockUserServiceImpl implements BlockUserService {
     constructor (
         private readonly userRepository: UserRepository,
-        private readonly passwordRetriver: PasswordRetriver,
+        private readonly passwordRetriever: PasswordRetriever,
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
@@ -22,11 +22,8 @@ export default class BlockUserServiceImpl implements BlockUserService {
 
         const blockerDto = this.userRepository.findById(credentials.userId)!!
 
-        const blockingPassword = this.passwordRetriver.retrieve(blockingUserDto.password)
-        const blockingUser = userFromDTO(blockingUserDto, blockingPassword)
-
-        const blockerPassword = this.passwordRetriver.retrieve(blockerDto.password)
-        const blocker = userFromDTO(blockerDto, blockerPassword)
+        const blockingUser = userFromDTO(blockingUserDto, this.passwordRetriever)
+        const blocker = userFromDTO(blockerDto, this.passwordRetriever)
 
         blocker.block(blockingUser.id)
         blockingUser.block(blocker.id)

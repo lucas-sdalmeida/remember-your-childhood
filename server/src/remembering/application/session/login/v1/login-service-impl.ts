@@ -1,7 +1,7 @@
 import { UserAccount, Username } from "../../../../domain/model/user";
 import Email from "../../../../domain/model/user/email";
 import { RawPassword } from "../../../../domain/model/user/password";
-import { PasswordChecker, PasswordRetriver } from "../../../../domain/services";
+import { PasswordChecker, PasswordRetriever } from "../../../../domain/services";
 import { UserAccountDTO, UserRepository } from "../../../user/repository";
 import { userFromDTO } from "../../../user/repository/user-dto";
 import Credentials, { createCredentials } from "../../shared/credentials";
@@ -10,7 +10,7 @@ import LoginService, { RequestModel } from "../login-service";
 export default class LoginServiceImpl implements LoginService {
     constructor (
         private readonly userRepository: UserRepository,
-        private readonly passwordRetriever: PasswordRetriver,
+        private readonly passwordRetriever: PasswordRetriever,
         private readonly passwordChecker: PasswordChecker,
     ) {}
 
@@ -40,9 +40,8 @@ export default class LoginServiceImpl implements LoginService {
             `There is not a user with:${ username ? ' username=' + username.toString() : '' }` + 
                 `${ email ? ' email=' + email.toString() : '' }`
         )
-            
-        const password = this.passwordRetriever.retrieve(dto.password)
-        return userFromDTO(dto, password)
+        
+        return userFromDTO(dto, this.passwordRetriever)
     }
 
     private findByUsernameAndEmail(username?: Username, email?: Email): UserAccountDTO | undefined {
