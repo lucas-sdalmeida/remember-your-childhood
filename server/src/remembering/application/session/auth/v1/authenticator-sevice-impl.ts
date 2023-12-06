@@ -10,10 +10,10 @@ export default class AuthenticatorServiceImpl implements AuthenticatorService {
 
     authenticate(credentials: Credentials): void {
         if (!this.accountRepository.existsById(credentials.userId))
-            throw new AuthenticationError(`There is not a account with id: ${credentials.userId}`)
+            throw new AuthenticationError(`There is not a account with id: ${credentials.userId.toString()}`)
         if (credentials.logoutDateTime)
-            throw new AuthenticationError(`The acccount ${credentials.userId} has already log-out.`)
+            throw new AuthenticationError(`The acccount ${credentials.userId.toString()} has already log-out.`)
         if (credentials.expirationDateTime < new Date())
-            throw new AuthenticationError(`The session of account ${credentials.userId} has already expired`)
+            throw new AuthenticationError(`The session of account ${credentials.userId.toString()} has already expired`)
     }
 }

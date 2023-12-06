@@ -1,6 +1,5 @@
 import { UUID } from "../../../../../util/types";
 import { FollowRequest } from "../../../../domain/model/follow";
-import { UserAccount } from "../../../../domain/model/user";
 import { PasswordRetriver } from "../../../../domain/services";
 import { AuthenticatorService } from "../../../session/auth";
 import Credentials from "../../../session/shared/credentials";
@@ -18,7 +17,7 @@ export default class AsnwerRequestServiceImpl implements AnswerRequestService {
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    accept(requestId: string, credentials: Credentials): void {
+    accept(requestId: UUID, credentials: Credentials): void {
         this.authenticatorService.authenticate(credentials)
         
         const request = this.findRequest(requestId, credentials.userId)
@@ -34,11 +33,11 @@ export default class AsnwerRequestServiceImpl implements AnswerRequestService {
     private findRequest(requestId: UUID, requesterId: UUID): FollowRequest {
         const requestDTO = this.followRequestRepository.findById(requestId)
         if (!requestDTO)
-            throw new Error(`There is not a follow request with id: ${requestId}`)
+            throw new Error(`There is not a follow request with id: ${requestId.toString()}`)
 
         const request = followRequestFromDTO(requestDTO)
         if (requesterId != request.receiver.value)
-            throw new Error(`The user with id ${requesterId} has no permission over the request ${requestId}`)
+            throw new Error(`The user with id ${requesterId.toString()} has no permission over the request ${requestId.toString()}`)
 
         return request
     }
@@ -48,7 +47,7 @@ export default class AsnwerRequestServiceImpl implements AnswerRequestService {
         return userFromDTO(dto,  this.passwordRetriver.retrieve(dto.password))
     }
 
-    refuse(requestId: string, credentials: Credentials): void {
+    refuse(requestId: UUID, credentials: Credentials): void {
         this.authenticatorService.authenticate(credentials)
 
         const request = this.findRequest(requestId, credentials.userId)

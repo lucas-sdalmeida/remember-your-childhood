@@ -7,6 +7,6 @@ export default class UserAccountId extends Identifier {
     ) { super() }
 
     toString() {
-        return this.value
+        return this.value.toString()
     }
 }

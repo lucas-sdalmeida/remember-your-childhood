@@ -20,17 +20,17 @@ export default class FollowRequestServiceImpl implements FollowRequestService {
     ) {}
     
 
-    follow(requestReceiver: string, credentials: Credentials): ResponseModel {
+    follow(requestReceiver: UUID, credentials: Credentials): ResponseModel {
         this.authenticatorService.authenticate(credentials)
         
         if (!this.userRepository.existsById(requestReceiver))
-            throw new Error(`Unable to send a follow request to someone that does not exists. Provided id: ${requestReceiver}`)
+            throw new Error(`Unable to send a follow request to someone that does not exists. Provided id: ${requestReceiver.toString()}`)
         if (requestReceiver == credentials.userId)
-            throw new Error(`The user ${credentials.userId} cannot follow themselves`)
+            throw new Error(`The user ${credentials.userId.toString()} cannot follow themselves`)
         if (this.isAlreadyFollowing(credentials.userId, requestReceiver))
-            throw new Error(`The user with id ${credentials.userId} is already following the user ${requestReceiver}`)
+            throw new Error(`The user with id ${credentials.userId.toString()} is already following the user ${requestReceiver.toString()}`)
         if (this.isAllowedToRequest(credentials.userId, requestReceiver))
-            throw new Error(`The user with id ${credentials.userId} cannot send another request to ${requestReceiver} yet!`)
+            throw new Error(`The user with id ${credentials.userId.toString()} cannot send another request to ${requestReceiver.toString()} yet!`)
 
         const id = this.numericIdGenerator.next()
         const request = FollowRequest.createRequest(

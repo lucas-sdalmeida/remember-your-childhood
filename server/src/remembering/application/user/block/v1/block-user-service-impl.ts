@@ -18,7 +18,7 @@ export default class BlockUserServiceImpl implements BlockUserService {
         
         const blockingUserDto = this.userRepository.findById(blockingUserId)
         if (!blockingUserDto)
-            throw new Error(`There is not a user with id: ${blockingUserId}`)
+            throw new Error(`There is not a user with id: ${blockingUserId.toString()}`)
 
         const blockerDto = this.userRepository.findById(credentials.userId)!!
 

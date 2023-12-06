@@ -17,11 +17,11 @@ export default class UnfollowServiceImpl implements UnfollowService {
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    unfollow(unfollowingUserId: string, credentials: Credentials): void {
+    unfollow(unfollowingUserId: UUID, credentials: Credentials): void {
         this.authenticatorService.authenticate(credentials)
 
         if (!this.userRepository.existsById(unfollowingUserId))
-            throw new Error(`There is not a user with id: ${unfollowingUserId}`)
+            throw new Error(`There is not a user with id: ${unfollowingUserId.toString()}`)
         const unfollowing = new UserAccountId(unfollowingUserId)
 
         const requester = this.findRequester(credentials.userId, unfollowing)
@@ -39,7 +39,7 @@ export default class UnfollowServiceImpl implements UnfollowService {
         const requester = userFromDTO(requesterDto, this.passwordRetriver.retrieve(requesterDto.password))
         
         if (!requester.isFollowing(unfollowingUserId))
-            throw new Error(`The user with id ${requesterId} is not following the user with id ${unfollowingUserId}`)
+            throw new Error(`The user with id ${requesterId.toString()} is not following the user with id ${unfollowingUserId.toString()}`)
 
         return requester
     }
