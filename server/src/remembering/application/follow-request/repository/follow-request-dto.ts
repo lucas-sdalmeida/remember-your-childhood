@@ -1,5 +1,6 @@
 import { UUID } from "../../../../util/types"
-import { FollowRequest } from "../../../domain/model/follow"
+import { FollowRequest, FollowRequestId } from "../../../domain/model/follow"
+import { UserAccountId } from "../../../domain/model/user"
 
 type FollowRequestDTO = {
     id: number,
@@ -21,4 +22,15 @@ export const followRequestToDTO = (followRequest: FollowRequest): FollowRequestD
         requestDate: followRequest.requestDate,
         anwserDate: followRequest.answerDate,
     }
+}
+
+export const followRequestFromDTO = (dto: FollowRequestDTO) => {
+    return FollowRequest.existentRequest(
+        new FollowRequestId(dto.id), 
+        new UserAccountId(dto.requesterId), 
+        new UserAccountId(dto.receiverId), 
+        dto.status,
+        dto.requestDate,
+        dto.anwserDate
+    )
 }
