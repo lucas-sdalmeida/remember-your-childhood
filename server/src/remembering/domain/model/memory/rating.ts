@@ -32,4 +32,8 @@ export default class Rating {
     toString() {
         return `${this.value}`
     }
+
+    toNumber() {
+        return this.value
+    }
 }

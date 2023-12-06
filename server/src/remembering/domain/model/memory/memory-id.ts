@@ -3,7 +3,7 @@ import { Identifier } from "../../util";
 
 export default class MemoryId extends Identifier {
     constructor (
-        private readonly value: UUID
+        readonly value: UUID
     ) { super() }
 
     toString() {

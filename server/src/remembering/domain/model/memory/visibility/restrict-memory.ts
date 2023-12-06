@@ -2,31 +2,40 @@ import { UserAccountId } from "../../user";
 import Visibility from "./visibility";
 
 export default class RestrictMemory extends Visibility {
+    private readonly _allowedUsers: UserAccountId[]
+
     constructor (
         ownerId: UserAccountId,
-        private readonly allowedUsers: UserAccountId[],
-    ) { super(ownerId) }
+        allowedUsers: UserAccountId[],
+    ) { 
+        super(ownerId) 
+        this._allowedUsers = allowedUsers
+    }
 
     protected allowsToSee(user: UserAccountId) {
-        return this.allowedUsers.includes(user)
+        return this._allowedUsers.includes(user)
     }
 
     grantPermissionToSee(user: UserAccountId) {
         if (this.allowsToSee(user)) return this
-        this.allowedUsers.push(user)
+        this._allowedUsers.push(user)
         return this
     }
 
     denyPermissionToSee(user: UserAccountId) {
-        const userIndex = this.allowedUsers.indexOf(user)
+        const userIndex = this._allowedUsers.indexOf(user)
         
         if (userIndex == -1) return this
 
-        this.allowedUsers.splice(userIndex, 1)
+        this._allowedUsers.splice(userIndex, 1)
         return this
     }
 
+    get allowedUsers() {
+        return this._allowedUsers.slice()
+    }
+
     toString() {
-        return `retricted memory to ${this.allowedUsers}`
+        return `retricted memory to ${this._allowedUsers}`
     }
 }
