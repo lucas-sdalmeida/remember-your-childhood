@@ -1,7 +1,9 @@
 import { UUID } from "../../../../util/types"
-import { Memory } from "../../../domain/model/memory"
-import { PrivateMemory, PublicMemory, RestrictMemory } from "../../../domain/model/memory/visibility"
+import { Memory, MemoryId, Moment, Rating } from "../../../domain/model/memory"
+import { ReleaseDate, Subject, Title } from "../../../domain/model/memory/subject"
+import { PrivateMemory, PublicMemory, RestrictMemory, Visibility } from "../../../domain/model/memory/visibility"
 import BlockedMemory from "../../../domain/model/memory/visibility/blocked-memory"
+import { UserAccountId } from "../../../domain/model/user"
 
 type MemoryDTO = {
     id: UUID,
@@ -58,4 +60,50 @@ const visibilityToDTO = ({ visibility }: Memory) => {
         type: type,
         target: target,
     }
+}
+
+export const memoryFromDTO = (dto: MemoryDTO) => {
+    const ownerId = new UserAccountId(dto.ownerId)
+
+    return new Memory(
+        new MemoryId(dto.id),
+        ownerId,
+        new Subject(
+            new Title(dto.subject.title),
+            dto.subject.type,
+            dto.subject.releaseDate ? ReleaseDate.of(dto.subject.releaseDate) : undefined,
+        ),
+        Rating.ofPercentage(dto.nostalgyLevel),
+        Rating.ofPercentage(dto.affectionLevel),
+        visibilityFromDTO(ownerId, dto),
+        dto.moments.map(moment => new Moment(moment)),
+    )
+}
+
+const visibilityFromDTO = (ownerId: UserAccountId, { visibility }: MemoryDTO) => {
+    let memoVisibility: Visibility
+
+    switch (visibility.type) {
+        case 'public':
+            memoVisibility = new PublicMemory(ownerId)
+            break
+        case 'private':
+            memoVisibility = new PrivateMemory(ownerId)
+        case 'restrict':
+            memoVisibility = new RestrictMemory(
+                ownerId,
+                visibility.target.map(id => new UserAccountId(id)),
+            )
+            break
+        case 'blocked':
+            memoVisibility = new BlockedMemory(
+                ownerId,
+                visibility.target.map(id => new UserAccountId(id))
+            )
+            break
+        default:
+            throw new Error(`Invalid visibility type ${ visibility.type }`)
+    }
+
+    return memoVisibility
 }
