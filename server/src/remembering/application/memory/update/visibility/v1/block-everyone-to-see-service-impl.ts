@@ -12,9 +12,9 @@ export default class BlockEveryoneToSeeServiceImpl implements BlockEveryoneToSee
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    makePrivate(id: UUID, credentials: Credentials): ResponseModel {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
-        const memoryDTO = this.memoryRepository.findById(id)
+    async makePrivate(id: UUID, credentials: Credentials): Promise<ResponseModel> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
+        const memoryDTO = await this.memoryRepository.findById(id)
 
         if (!memoryDTO) throw new Error(
             `There is not a memory with id: ${id.toString()}`
@@ -27,7 +27,7 @@ export default class BlockEveryoneToSeeServiceImpl implements BlockEveryoneToSee
         )
 
         memory.denyToEveryoneSee()
-        this.memoryRepository.create(memoryToDTO(memory))
+        await this.memoryRepository.create(memoryToDTO(memory))
 
         return { id: id }
     }

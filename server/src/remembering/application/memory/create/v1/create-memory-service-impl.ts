@@ -15,18 +15,18 @@ export default class CreateMemoryServiceImpl implements CreateMemoryService {
         private authenticatorService: AuthenticatorService,
     ) {}
 
-    create(ownerId: UUID, model: RequestModel, credentials: Credentials): ResponseModel {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async create(ownerId: UUID, model: RequestModel, credentials: Credentials): Promise<ResponseModel> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
 
-        if (!this.userRepository.existsById(ownerId))
+        if (!(await this.userRepository.existsById(ownerId)))
             throw new Error(`There is not a user with id: ${ownerId}`)
         if (ownerId != requesterDTO.id)
             throw new Error(`The requester with id ${requesterDTO.id} cannot create memories for ${ownerId}`)
 
-        const id = this.uuidGenerator.next()
+        const id = await this.uuidGenerator.next()
         const memory = memoryFromRequestModel(id, ownerId, model)
 
-        this.memoryRepository.create(memoryToDTO(memory))
+        await this.memoryRepository.create(memoryToDTO(memory))
 
         return { id: id }
     }

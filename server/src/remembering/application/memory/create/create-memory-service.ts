@@ -7,7 +7,7 @@ import { UserAccountId } from "../../../domain/model/user";
 import Credentials from "../../session/shared/credentials";
 
 export default interface CreateMemoryService {
-    create(ownerId: UUID, model: RequestModel, credentials: Credentials): ResponseModel
+    create(ownerId: UUID, model: RequestModel, credentials: Credentials): Promise<ResponseModel>
 }
 
 export type RequestModel = {

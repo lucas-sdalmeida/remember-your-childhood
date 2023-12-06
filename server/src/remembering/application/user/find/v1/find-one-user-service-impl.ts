@@ -11,9 +11,9 @@ export default class FindOneUserServiceImpl implements FindOneUserService {
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    findById(id: UUID, credentials: Credentials): ResponseModel | undefined {
-        this.authenticatorService.authenticate(credentials)
-        const dto = this.userRepository.findByIdIfHasNotBlocked(id, credentials.userId)
+    async findById(id: UUID, credentials: Credentials): Promise<ResponseModel | undefined> {
+        await this.authenticatorService.authenticate(credentials)
+        const dto = await this.userRepository.findByIdIfHasNotBlocked(id, credentials.userId)
         return dto ? { user: { 
             id: dto.id,
             username: dto.username,

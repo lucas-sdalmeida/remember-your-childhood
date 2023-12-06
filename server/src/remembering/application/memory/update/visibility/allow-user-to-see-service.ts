@@ -3,5 +3,5 @@ import Credentials from "../../../session/shared/credentials";
 import ResponseModel from "../response-model";
 
 export default interface AllowUserToSeeService {
-    allowUser(memoryId: UUID, userId: UUID, credentials: Credentials): ResponseModel
+    allowUser(memoryId: UUID, userId: UUID, credentials: Credentials): Promise<ResponseModel>
 }

@@ -10,9 +10,9 @@ export default class FindAllUsersServiceImpl implements FindAllUsersService {
         private readonly authenticator: AuthenticatorService,
     ) {}
 
-    findAll(credentials: Credentials): ResponseModel[] {
-        this.authenticator.authenticate(credentials)
-        return this.userRepository.findAllThatHasNotBlocked(credentials.userId)
+    async findAll(credentials: Credentials): Promise<ResponseModel[]> {
+        await this.authenticator.authenticate(credentials)
+        return (await this.userRepository.findAllThatHasNotBlocked(credentials.userId))
             .map(dto => { return { 
                 user: { 
                     id: dto.id,

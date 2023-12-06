@@ -2,17 +2,17 @@ import { UUID } from "../../../../util/types";
 import FollowRequestDTO from "./follow-request-dto";
 
 export default interface FollowRequestRepository {
-    create(request: FollowRequestDTO): void
+    create(request: FollowRequestDTO): Promise<void>
 
-    findById(id: UUID): FollowRequestDTO | undefined
+    findById(id: UUID): Promise<FollowRequestDTO | undefined>
 
-    findSomeByRequesterId(requesterId: UUID): FollowRequestDTO[]
+    findSomeByRequesterId(requesterId: UUID): Promise<FollowRequestDTO[]>
 
-    findSomeByRequesterIdAndReceiverId(requesterId: UUID, receiverId: UUID): FollowRequestDTO[]
+    findSomeByRequesterIdAndReceiverId(requesterId: UUID, receiverId: UUID): Promise<FollowRequestDTO[]>
 
-    findAll(): FollowRequestDTO[]
+    findAll(): Promise<FollowRequestDTO[]>
 
-    delete(id: UUID): void
+    delete(id: UUID): Promise<void>
 
-    existsById(id: UUID): boolean
+    existsById(id: UUID): Promise<boolean>
 }

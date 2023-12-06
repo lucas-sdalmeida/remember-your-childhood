@@ -17,11 +17,11 @@ export default class FindOneMemoryServiceImpl implements FindOneMemoryService {
         private readonly authenticator: AuthenticatorService,
     ) {}
 
-    findById(memoryId: UUID, credentials: Credentials): ResponseModel | undefined {
-        const requesterDTO = this.authenticator.authenticate(credentials)
+    async findById(memoryId: UUID, credentials: Credentials): Promise<ResponseModel | undefined> {
+        const requesterDTO = await this.authenticator.authenticate(credentials)
         const requester = userFromDTO(requesterDTO, this.passwordRetriever)
 
-        const memoryDTO = this.memoryRepository.findById(memoryId)
+        const memoryDTO = await this.memoryRepository.findById(memoryId)
 
         if (!memoryDTO)
             return undefined

@@ -16,11 +16,11 @@ export default class FindAllMemoriesServiceImpl implements FindAllMemoriesServic
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    findAll(credentials: Credentials): ResponseModel[] {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async findAll(credentials: Credentials): Promise<ResponseModel[]> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
         const requester = userFromDTO(requesterDTO, this.passwordRetriver)
 
-        return this.memoryRepository.findAll()
+        return (await this.memoryRepository.findAll())
             .map(memo => memoryFromDTO(memo))
             .filter(memo => !requester.hasBlocked(memo.ownerId))
             .filter(memo => memo.visibility.isAllowedToSee(requester.id))

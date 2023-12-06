@@ -12,9 +12,9 @@ export default class DeleteMemoryServiceImpl implements DeleteMemoryService {
         private readonly authenticatorService: AuthenticatorService,
     ) {}    
     
-    delete(id: UUID, credentials: Credentials): void {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
-        const memoryDTO = this.memoryRepository.findById(id)
+    async delete(id: UUID, credentials: Credentials): Promise<void> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
+        const memoryDTO = await this.memoryRepository.findById(id)
 
         if (!memoryDTO) throw new Error(
             `There is not a memory with id: ${id.toString()}`
@@ -26,16 +26,16 @@ export default class DeleteMemoryServiceImpl implements DeleteMemoryService {
             `The user with id ${requesterDTO.id.toString()} does not have deleting permissions on memory ${id.toString()}`
         )
 
-        this.memoryRepository.delete(id)
+        await this.memoryRepository.delete(id)
     }
 
-    deleteByOwnerId(ownerId: UUID, credentials: Credentials): void {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async deleteByOwnerId(ownerId: UUID, credentials: Credentials): Promise<void> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
 
         if (requesterDTO.id != ownerId) throw new Error(
             `The user ${requesterDTO.id.toString()} does not have deleting permissions on memories of user ${ownerId.toString()}`
         )
 
-        this.memoryRepository.deleteByOnwerId(ownerId)
+        await this.memoryRepository.deleteByOnwerId(ownerId)
     }
 }

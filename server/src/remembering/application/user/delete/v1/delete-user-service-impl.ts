@@ -12,14 +12,14 @@ export default class DeleteUserServiceImpl implements DeleteUserService {
         private readonly deleteMemoryService: DeleteMemoryService,
     ) {}
 
-    delete(id: UUID, credentials: Credentials): void {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async delete(id: UUID, credentials: Credentials): Promise<void> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
 
         if (requesterDTO.id != id) throw new Error(
             `The user with id ${requesterDTO.id.toString()} does not have permission to delete account of user ${id.toString()}`
         )
         
-        this.deleteMemoryService.deleteByOwnerId(id, credentials)
-        this.userRepository.delete(id)
+        await this.deleteMemoryService.deleteByOwnerId(id, credentials)
+        await this.userRepository.delete(id)
     }
 }

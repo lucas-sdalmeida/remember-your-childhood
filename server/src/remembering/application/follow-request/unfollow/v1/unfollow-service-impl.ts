@@ -17,11 +17,11 @@ export default class UnfollowServiceImpl implements UnfollowService {
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    unfollow(unfollowingUserId: UUID, credentials: Credentials): void {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async unfollow(unfollowingUserId: UUID, credentials: Credentials): Promise<void> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
         const requester = userFromDTO(requesterDTO, this.passwordRetriever)
 
-        if (!this.userRepository.existsById(unfollowingUserId))
+        if (!(await this.userRepository.existsById(unfollowingUserId)))
             throw new Error(`There is not a user with id: ${unfollowingUserId.toString()}`)
         
         const unfollowing = new UserAccountId(unfollowingUserId)
@@ -29,16 +29,16 @@ export default class UnfollowServiceImpl implements UnfollowService {
         if (!requester.isFollowing(unfollowing))
             throw new Error(`The user with id ${requester.id.toString()} is not following the user with id ${unfollowing.toString()}`)
         
-        const request = this.findLastRequest(credentials.userId, unfollowingUserId)
+        const request = await this.findLastRequest(credentials.userId, unfollowingUserId)
         requester.unfollow(unfollowing)
         request.unfollow()
 
-        this.userRepository.create(userToDTO(requester))
-        this.followRequestRepository.create(followRequestToDTO(request))
+        await this.userRepository.create(userToDTO(requester))
+        await this.followRequestRepository.create(followRequestToDTO(request))
     }
 
-    private findLastRequest(requesterId: UUID, receiverId: UUID) {
-        const requestDtos = this.followRequestRepository.findSomeByRequesterIdAndReceiverId(requesterId, receiverId)
+    private async findLastRequest(requesterId: UUID, receiverId: UUID) {
+        const requestDtos = await this.followRequestRepository.findSomeByRequesterIdAndReceiverId(requesterId, receiverId)
         const requests = requestDtos.map(dto => followRequestFromDTO(dto))
             .sort((first, second) => first.requestDate.valueOf() - second.requestDate.valueOf())
         return requests[requests.length - 1]

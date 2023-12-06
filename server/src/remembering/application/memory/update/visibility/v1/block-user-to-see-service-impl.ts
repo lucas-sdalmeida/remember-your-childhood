@@ -18,18 +18,18 @@ export default class BlockUserToSeeServiceImpl implements BlockUserToSeeService 
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    blockUser(memoryId: UUID, userId: UUID, credentials: Credentials): ResponseModel {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async blockUser(memoryId: UUID, userId: UUID, credentials: Credentials): Promise<ResponseModel> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
         const requester = userFromDTO(requesterDTO, this.passwordRetriever)
 
         if (requester.id.value == userId) throw new Error(
             `User with id ${requester.id.toString()} cannot block themself to see their own memories`
         )
-        if (!this.userRepository.existsById(userId)) throw new Error(
+        if (!(await this.userRepository.existsById(userId))) throw new Error(
             `There is not a user with id ${userId.toString()} to block`
         )
 
-        const memoryDTO = this.memoryRepository.findById(memoryId)
+        const memoryDTO = await this.memoryRepository.findById(memoryId)
         if (!memoryDTO) throw new Error(
             `There is not a memory with id: ${memoryId.toString()}`
         )
@@ -40,7 +40,7 @@ export default class BlockUserToSeeServiceImpl implements BlockUserToSeeService 
         )
 
         memory.revokePermissionToSee(new UserAccountId(userId))
-        this.memoryRepository.create(memoryToDTO(memory))
+        await this.memoryRepository.create(memoryToDTO(memory))
 
         return { id: memoryId }
     }

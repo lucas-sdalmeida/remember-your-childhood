@@ -17,10 +17,10 @@ export default class UpdateMemoryServiceImpl implements UpdateMemoryService {
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    update(id: UUID, model: RequestModel, credentials: Credentials): ResponseModel {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async update(id: UUID, model: RequestModel, credentials: Credentials): Promise<ResponseModel> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
         const requester = userFromDTO(requesterDTO, this.passwordRetriever)
-        const memoryDTO = this.memoryRepository.findById(id)
+        const memoryDTO = await this.memoryRepository.findById(id)
 
         if (!memoryDTO)
             throw new Error(`There is not a memory with id: ${id}`)
@@ -46,7 +46,7 @@ export default class UpdateMemoryServiceImpl implements UpdateMemoryService {
             memory.affectionLevel = Rating.ofPercentage(affectionLevel)
 
         
-        this.memoryRepository.create(memoryToDTO(memory))
+        await this.memoryRepository.create(memoryToDTO(memory))
         return { id: id }
     }
 }

@@ -14,9 +14,9 @@ export default class AllowEveryoneToSeeServiceImpl implements AllowToEveryoneSee
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    makePublic(id: UUID, credentials: Credentials): ResponseModel {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
-        const memoryDTO = this.memoryRepository.findById(id)
+    async makePublic(id: UUID, credentials: Credentials): Promise<ResponseModel> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
+        const memoryDTO = await this.memoryRepository.findById(id)
 
         if (!memoryDTO) throw new Error(
             `There is not a memory with id: ${memoryDTO}`
@@ -29,7 +29,7 @@ export default class AllowEveryoneToSeeServiceImpl implements AllowToEveryoneSee
         )
 
         memory.allowToPublicSee()
-        this.memoryRepository.create(memoryToDTO(memory))
+        await this.memoryRepository.create(memoryToDTO(memory))
 
         return { id: id }
     }

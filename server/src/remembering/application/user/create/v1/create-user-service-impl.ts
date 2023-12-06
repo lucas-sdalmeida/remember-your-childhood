@@ -10,18 +10,18 @@ export default class CreateUserServiceImpl implements CreateUserService {
         private readonly passwordEncrypter: PasswordEncrypter,
     ) {}
 
-    create(model: RequestModel): ResponseModel {
-        if (this.userRepository.existsByEmail(model.email))
+    async create(model: RequestModel): Promise<ResponseModel> {
+        if (await this.userRepository.existsByEmail(model.email))
             throw new Error(`There already is a account with that uses the email: ${model.email}`)
-        if (this.userRepository.existsByUsername(model.username))
+        if (await this.userRepository.existsByUsername(model.username))
             throw new Error(`The username < ${model.username} > already is in use!`)
         
 
-        const id = this.uuidGenerator.next()
-        const password = this.passwordEncrypter.encrypt(RawPassword.of(model.password))
+        const id = await this.uuidGenerator.next()
+        const password = await this.passwordEncrypter.encrypt(RawPassword.of(model.password))
         const user = userFromRequestModel(id, password, model)
 
-        this.userRepository.create(userToDTO(user))
+        await this.userRepository.create(userToDTO(user))
         return { id: id }
     }
 }

@@ -4,7 +4,7 @@ import Email from "../../../domain/model/user/email"
 import { EncryptedPassword } from "../../../domain/model/user/password"
 
 export default interface CreateUserService {
-    create(model: RequestModel): ResponseModel
+    create(model: RequestModel): Promise<ResponseModel>
 }
 
 export type RequestModel = {

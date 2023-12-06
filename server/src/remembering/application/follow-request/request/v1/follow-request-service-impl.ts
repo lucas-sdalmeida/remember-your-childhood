@@ -20,33 +20,33 @@ export default class FollowRequestServiceImpl implements FollowRequestService {
     ) {}
     
 
-    follow(requestReceiver: UUID, credentials: Credentials): ResponseModel {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async follow(requestReceiver: UUID, credentials: Credentials): Promise<ResponseModel> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
         const requester = userFromDTO(requesterDTO, this.passwordRetriever)
         
-        if (!this.userRepository.existsById(requestReceiver))
+        if (!(await this.userRepository.existsById(requestReceiver)))
             throw new Error(`Unable to send a follow request to someone that does not exists. Provided id: ${requestReceiver.toString()}`)
         if (requestReceiver == credentials.userId)
             throw new Error(`The user ${credentials.userId.toString()} cannot follow themselves`)
         if (requester.isFollowing(new UserAccountId(requestReceiver)))
             throw new Error(`The user with id ${credentials.userId.toString()} is already following the user ${requestReceiver.toString()}`)
-        if (this.isAllowedToRequest(credentials.userId, requestReceiver))
+        if (!(await this.isAllowedToRequest(credentials.userId, requestReceiver)))
             throw new Error(`The user with id ${credentials.userId.toString()} cannot send another request to ${requestReceiver.toString()} yet!`)
 
-        const id = this.numericIdGenerator.next()
+        const id = await this.numericIdGenerator.next()
         const request = FollowRequest.createRequest(
             new FollowRequestId(id),
             new UserAccountId(credentials.userId),
             new UserAccountId(requestReceiver),
         )
 
-        this.followRequestRepository.create(followRequestToDTO(request))
+        await this.followRequestRepository.create(followRequestToDTO(request))
 
         return { followRequestId: id }
     }
 
-    private isAllowedToRequest(requester: UUID, receiver: UUID): boolean {
-        const requests = this.followRequestRepository.findSomeByRequesterIdAndReceiverId(requester, receiver)
+    private async isAllowedToRequest(requester: UUID, receiver: UUID): Promise<boolean> {
+        const requests = await this.followRequestRepository.findSomeByRequesterIdAndReceiverId(requester, receiver)
 
         if (requests.length == 0)
             return true

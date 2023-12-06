@@ -13,11 +13,11 @@ export default class BlockUserServiceImpl implements BlockUserService {
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    block(blockingUserId: UUID, credentials: Credentials): void {
-        const blockerDTO = this.authenticatorService.authenticate(credentials)
+    async block(blockingUserId: UUID, credentials: Credentials): Promise<void> {
+        const blockerDTO = await this.authenticatorService.authenticate(credentials)
         const blocker = userFromDTO(blockerDTO, this.passwordRetriever)
         
-        const blockingUserDto = this.userRepository.findById(blockingUserId)
+        const blockingUserDto = await this.userRepository.findById(blockingUserId)
         if (!blockingUserDto)
             throw new Error(`There is not a user with id: ${blockingUserId.toString()}`)
 
@@ -26,7 +26,7 @@ export default class BlockUserServiceImpl implements BlockUserService {
         blocker.block(blockingUser.id)
         blockingUser.block(blocker.id)
 
-        this.userRepository.create(userToDTO(blocker))
-        this.userRepository.create(userToDTO(blockingUser))
+        await this.userRepository.create(userToDTO(blocker))
+        await this.userRepository.create(userToDTO(blockingUser))
     }
 }

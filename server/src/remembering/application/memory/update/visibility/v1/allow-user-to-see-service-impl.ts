@@ -18,10 +18,10 @@ export default class AllowUserToSeeServiceImpl implements AllowUserToSeeService 
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    allowUser(memoryId: UUID, userId: UUID, credentials: Credentials): ResponseModel {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async allowUser(memoryId: UUID, userId: UUID, credentials: Credentials): Promise<ResponseModel> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
         const requester = userFromDTO(requesterDTO, this.passwordRetriever)
-        const memoryDTO = this.memoryRepository.findById(memoryId)
+        const memoryDTO = await this.memoryRepository.findById(memoryId)
 
         if (requester.id.value == userId)
             return { id: memoryId }
@@ -39,7 +39,7 @@ export default class AllowUserToSeeServiceImpl implements AllowUserToSeeService 
         )
 
         memory.grantPermissionToSee(new UserAccountId(userId))
-        this.memoryRepository.create(memoryToDTO(memory))
+        await this.memoryRepository.create(memoryToDTO(memory))
 
         return { id: memoryId }
     }

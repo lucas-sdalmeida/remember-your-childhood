@@ -7,8 +7,8 @@ export default class SignUpServideImpl implements SignUpService {
         private readonly createUserService: CreateUserService,
     ) {}
 
-    signup(model: RequestModel): Credentials {
-        const id = this.createUserService.create(model).id
+    async signup(model: RequestModel): Promise<Credentials> {
+        const id = (await this.createUserService.create(model)).id
         return createCredentials(id)
     }
 }

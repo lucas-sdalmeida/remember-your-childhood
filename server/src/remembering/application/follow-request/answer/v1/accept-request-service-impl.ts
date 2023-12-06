@@ -17,21 +17,21 @@ export default class AsnwerRequestServiceImpl implements AnswerRequestService {
         private readonly authenticatorService: AuthenticatorService,
     ) {}
 
-    accept(requestId: UUID, credentials: Credentials): void {
-        const requesterDTO = this.authenticatorService.authenticate(credentials)
+    async accept(requestId: UUID, credentials: Credentials): Promise<void> {
+        const requesterDTO = await this.authenticatorService.authenticate(credentials)
         
         const requester = userFromDTO(requesterDTO, this.passwordRetriever)
-        const request = this.findRequest(requestId, credentials.userId)
+        const request = await this.findRequest(requestId, credentials.userId)
 
         request.accept()
         requester.follow(request.receiver)
 
-        this.userRepository.create(userToDTO(requester))
-        this.followRequestRepository.create(followRequestToDTO(request))
+        await this.userRepository.create(userToDTO(requester))
+        await this.followRequestRepository.create(followRequestToDTO(request))
     }
 
-    private findRequest(requestId: UUID, requesterId: UUID): FollowRequest {
-        const requestDTO = this.followRequestRepository.findById(requestId)
+    private async findRequest(requestId: UUID, requesterId: UUID): Promise<FollowRequest> {
+        const requestDTO = await this.followRequestRepository.findById(requestId)
         if (!requestDTO)
             throw new Error(`There is not a follow request with id: ${requestId.toString()}`)
 
@@ -42,12 +42,12 @@ export default class AsnwerRequestServiceImpl implements AnswerRequestService {
         return request
     }
 
-    refuse(requestId: UUID, credentials: Credentials): void {
-        this.authenticatorService.authenticate(credentials)
+    async refuse(requestId: UUID, credentials: Credentials): Promise<void> {
+        await this.authenticatorService.authenticate(credentials)
 
-        const request = this.findRequest(requestId, credentials.userId)
+        const request = await this.findRequest(requestId, credentials.userId)
         request.refuse()
 
-        this.followRequestRepository.create(followRequestToDTO(request))
+        await this.followRequestRepository.create(followRequestToDTO(request))
     }
 }

@@ -1,3 +1,3 @@
 export default interface NumericIdGenerator {
-    next(): number
+    next(): Promise<number>
 }

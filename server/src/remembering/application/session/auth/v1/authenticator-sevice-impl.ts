@@ -8,8 +8,8 @@ export default class AuthenticatorServiceImpl implements AuthenticatorService {
         private readonly accountRepository: UserRepository,
     ) {}
 
-    authenticate(credentials: Credentials): UserAccountDTO {
-        const userDTO = this.accountRepository.findById(credentials.userId)
+    async authenticate(credentials: Credentials): Promise<UserAccountDTO> {
+        const userDTO = await this.accountRepository.findById(credentials.userId)
         if (!userDTO)
             throw new AuthenticationError(`There is not a account with id: ${credentials.userId.toString()}`)
         if (credentials.logoutDateTime)
