@@ -21,13 +21,14 @@ export default class FollowRequestServiceImpl implements FollowRequestService {
     
 
     follow(requestReceiver: UUID, credentials: Credentials): ResponseModel {
-        this.authenticatorService.authenticate(credentials)
+        const requesterDTO = this.authenticatorService.authenticate(credentials)
+        const requester = userFromDTO(requesterDTO, this.passwordRetriever)
         
         if (!this.userRepository.existsById(requestReceiver))
             throw new Error(`Unable to send a follow request to someone that does not exists. Provided id: ${requestReceiver.toString()}`)
         if (requestReceiver == credentials.userId)
             throw new Error(`The user ${credentials.userId.toString()} cannot follow themselves`)
-        if (this.isAlreadyFollowing(credentials.userId, requestReceiver))
+        if (requester.isFollowing(new UserAccountId(requestReceiver)))
             throw new Error(`The user with id ${credentials.userId.toString()} is already following the user ${requestReceiver.toString()}`)
         if (this.isAllowedToRequest(credentials.userId, requestReceiver))
             throw new Error(`The user with id ${credentials.userId.toString()} cannot send another request to ${requestReceiver.toString()} yet!`)
@@ -42,12 +43,6 @@ export default class FollowRequestServiceImpl implements FollowRequestService {
         this.followRequestRepository.create(followRequestToDTO(request))
 
         return { followRequestId: id }
-    }
-
-    private isAlreadyFollowing(requester: UUID, receiver: UUID): boolean {
-        const dto = this.userRepository.findById(requester)!!
-        const requesterAccount = userFromDTO(dto, this.passwordRetriever)
-        return requesterAccount.isFollowing(new UserAccountId(receiver))
     }
 
     private isAllowedToRequest(requester: UUID, receiver: UUID): boolean {

@@ -14,16 +14,14 @@ export default class BlockUserServiceImpl implements BlockUserService {
     ) {}
 
     block(blockingUserId: UUID, credentials: Credentials): void {
-        this.authenticatorService.authenticate(credentials)
+        const blockerDTO = this.authenticatorService.authenticate(credentials)
+        const blocker = userFromDTO(blockerDTO, this.passwordRetriever)
         
         const blockingUserDto = this.userRepository.findById(blockingUserId)
         if (!blockingUserDto)
             throw new Error(`There is not a user with id: ${blockingUserId.toString()}`)
 
-        const blockerDto = this.userRepository.findById(credentials.userId)!!
-
         const blockingUser = userFromDTO(blockingUserDto, this.passwordRetriever)
-        const blocker = userFromDTO(blockerDto, this.passwordRetriever)
 
         blocker.block(blockingUser.id)
         blockingUser.block(blocker.id)

@@ -18,30 +18,23 @@ export default class UnfollowServiceImpl implements UnfollowService {
     ) {}
 
     unfollow(unfollowingUserId: UUID, credentials: Credentials): void {
-        this.authenticatorService.authenticate(credentials)
+        const requesterDTO = this.authenticatorService.authenticate(credentials)
+        const requester = userFromDTO(requesterDTO, this.passwordRetriever)
 
         if (!this.userRepository.existsById(unfollowingUserId))
             throw new Error(`There is not a user with id: ${unfollowingUserId.toString()}`)
+        
         const unfollowing = new UserAccountId(unfollowingUserId)
-
-        const requester = this.findRequester(credentials.userId, unfollowing)
+        
+        if (!requester.isFollowing(unfollowing))
+            throw new Error(`The user with id ${requester.id.toString()} is not following the user with id ${unfollowing.toString()}`)
+        
         const request = this.findLastRequest(credentials.userId, unfollowingUserId)
-
         requester.unfollow(unfollowing)
         request.unfollow()
 
         this.userRepository.create(userToDTO(requester))
         this.followRequestRepository.create(followRequestToDTO(request))
-    }
-
-    private findRequester(requesterId: UUID, unfollowingUserId: UserAccountId): UserAccount {
-        const requesterDto = this.userRepository.findById(requesterId)!!
-        const requester = userFromDTO(requesterDto, this.passwordRetriever)
-        
-        if (!requester.isFollowing(unfollowingUserId))
-            throw new Error(`The user with id ${requesterId.toString()} is not following the user with id ${unfollowingUserId.toString()}`)
-
-        return requester
     }
 
     private findLastRequest(requesterId: UUID, receiverId: UUID) {

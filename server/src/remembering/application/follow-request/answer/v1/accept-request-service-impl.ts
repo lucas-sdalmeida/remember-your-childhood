@@ -18,10 +18,10 @@ export default class AsnwerRequestServiceImpl implements AnswerRequestService {
     ) {}
 
     accept(requestId: UUID, credentials: Credentials): void {
-        this.authenticatorService.authenticate(credentials)
+        const requesterDTO = this.authenticatorService.authenticate(credentials)
         
+        const requester = userFromDTO(requesterDTO, this.passwordRetriever)
         const request = this.findRequest(requestId, credentials.userId)
-        const requester = this.findRequester(request.requester.value)
 
         request.accept()
         requester.follow(request.receiver)
@@ -40,11 +40,6 @@ export default class AsnwerRequestServiceImpl implements AnswerRequestService {
             throw new Error(`The user with id ${requesterId.toString()} has no permission over the request ${requestId.toString()}`)
 
         return request
-    }
-
-    private findRequester(requesterId: UUID) {
-        const dto = this.userRepository.findById(requesterId)!!
-        return userFromDTO(dto,  this.passwordRetriever)
     }
 
     refuse(requestId: UUID, credentials: Credentials): void {
