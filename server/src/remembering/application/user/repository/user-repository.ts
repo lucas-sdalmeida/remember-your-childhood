@@ -9,6 +9,10 @@ export default interface UserRepository {
     findByIdIfHasNotBlocked(id: UUID, blocked: UUID): UserDTO | undefined
 
     findByUsername(username: string): UserDTO | undefined
+    
+    findByEmail(email: string): UserDTO | undefined
+
+    findByUsernameAndEmail(username: string, email: string): UserDTO | undefined
 
     findAll(): UserDTO[]
 
