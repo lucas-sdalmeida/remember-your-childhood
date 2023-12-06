@@ -25,6 +25,8 @@ export default class FollowRequestServiceImpl implements FollowRequestService {
         
         if (!this.userRepository.existsById(requestReceiver))
             throw new Error(`Unable to send a follow request to someone that does not exists. Provided id: ${requestReceiver}`)
+        if (requestReceiver == credentials.userId)
+            throw new Error(`The user ${credentials.userId} cannot follow themselves`)
         if (this.isAlreadyFollowing(credentials.userId, requestReceiver))
             throw new Error(`The user with id ${credentials.userId} is already following the user ${requestReceiver}`)
         if (this.isAllowedToRequest(credentials.userId, requestReceiver))
