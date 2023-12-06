@@ -12,5 +12,7 @@ export default interface MemoryRepository {
 
     delete(id: UUID): void
 
+    deleteByOnwerId(ownerId: UUID): void
+
     existsById(id: UUID): boolean
 }
