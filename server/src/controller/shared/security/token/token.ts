@@ -3,5 +3,6 @@ export default class Token {
         readonly sub: string,
         readonly iat: number,
         readonly exp: number,
+        readonly logout?: number,
     ) {}
 }
