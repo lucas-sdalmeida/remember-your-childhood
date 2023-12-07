@@ -2,6 +2,11 @@ import SignUpServideImpl from "./application/session/signup/v1/signup-service-im
 
 import { RequestModel as CreateUserRequestModel } from "./application/user/create";
 import CreateUserServiceImpl from "./application/user/create/v1/create-user-service-impl";
+import { UserAccountDTO, UserRepository } from "./application/user/repository";
+
+import { MemoryDTO, MemoryRepository } from "./application/memory/repository";
+
+import { FollowRequestDTO, FollowRequestRepository } from "./application/follow-request/repository";
 
 import Credentials from "./application/session/shared/credentials";
 
@@ -14,6 +19,14 @@ export {
 
     CreateUserServiceImpl,
     CreateUserRequestModel,
+    UserAccountDTO,
+    UserRepository,
+
+    MemoryDTO, 
+    MemoryRepository,
+
+    FollowRequestDTO,
+    FollowRequestRepository,
     
     Credentials,
 

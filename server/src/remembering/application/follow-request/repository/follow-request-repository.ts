@@ -4,7 +4,7 @@ import FollowRequestDTO from "./follow-request-dto";
 export default interface FollowRequestRepository {
     create(request: FollowRequestDTO): Promise<void>
 
-    findById(id: UUID): Promise<FollowRequestDTO | undefined>
+    findById(id: number): Promise<FollowRequestDTO | undefined>
 
     findSomeByRequesterId(requesterId: UUID): Promise<FollowRequestDTO[]>
 
@@ -12,7 +12,7 @@ export default interface FollowRequestRepository {
 
     findAll(): Promise<FollowRequestDTO[]>
 
-    delete(id: UUID): Promise<void>
+    delete(id: number): Promise<void>
 
-    existsById(id: UUID): Promise<boolean>
+    existsById(id: number): Promise<boolean>
 }
