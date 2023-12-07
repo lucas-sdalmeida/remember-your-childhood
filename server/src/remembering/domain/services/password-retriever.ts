@@ -1,7 +1,7 @@
 import { EncryptedPassword } from "../model/user/password";
 
 export default interface PasswordRetriever {
-    isEncryptedPassword(possiblyEncryptedPassword: string): Promise<boolean>
+    isEncryptedPassword(possiblyEncryptedPassword: string): boolean
 
-    retrieve(password: string): Promise<EncryptedPassword>
+    retrieve(password: string): EncryptedPassword
 }
