@@ -1,7 +1,5 @@
 export default abstract class UUID {
-    constructor (
-        readonly value: Uint8Array,
-    ) {}
+    abstract toUnsignedIntArray(): Uint8Array
 
     abstract toString(): string
 }
