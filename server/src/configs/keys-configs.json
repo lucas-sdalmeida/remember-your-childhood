@@ -1,0 +1,5 @@
+{
+    "directoryFromSrc": "./assets/keys/",
+    "privateKeyFileName": "private-key.pem",
+    "publicKeyFileName": "public-key.pem"
+}

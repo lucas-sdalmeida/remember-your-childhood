@@ -3,3 +3,4 @@ node_modules/
 
 ### Application ###
 **/configs/database.json
+**/assets/keys/
