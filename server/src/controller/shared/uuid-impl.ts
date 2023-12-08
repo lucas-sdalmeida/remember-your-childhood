@@ -12,7 +12,7 @@ export default class UUIDV4 extends AbstractUUID {
         return new UUIDV4(uuid())
     }
 
-    static ofString(value: `${string}-${string}-${string}-${string}`) {
+    static ofString(value: string) {
         if (!validate(value))
             throw new Error(`${value} does not represents a valid UUID`)
         return new UUIDV4(value)
