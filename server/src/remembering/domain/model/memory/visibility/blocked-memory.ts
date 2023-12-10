@@ -1,5 +1,5 @@
-import { UserAccountId } from "../../user";
-import Visibility from "./visibility";
+import { UserAccountId } from '../../user'
+import Visibility from './visibility'
 
 export default class BlockedMemory extends Visibility {
     private readonly _blockedUsers: UserAccountId[]

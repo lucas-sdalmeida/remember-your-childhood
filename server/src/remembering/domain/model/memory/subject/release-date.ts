@@ -7,13 +7,13 @@ export default class ReleaseDate {
         const date = value instanceof Date ? value : new Date(value)
 
         if (date.valueOf() >= new Date().valueOf()) 
-            throw new Error(`It is impossivble to the memory subject to be released after now. Provided: ${value}`)
+            throw new Error(`It is impossible to the memory subject to be released after now. Provided: ${value}`)
 
         return new ReleaseDate(date)
     }
 
     toDate() {
-        return new Date(this.value);
+        return new Date(this.value)
     }
 
     toString() {

@@ -1,6 +1,6 @@
-import { UserAccountId } from "../../user";
-import RestrictMemory from "./restrict-memory";
-import Visibility from "./visibility";
+import { UserAccountId } from '../../user'
+import RestrictMemory from './restrict-memory'
+import Visibility from './visibility'
 
 export default class PrivateMemory extends Visibility {
     protected allowsToSee(user: UserAccountId) {

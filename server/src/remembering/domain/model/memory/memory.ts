@@ -1,10 +1,10 @@
-import { Entity } from "../../util";
-import { UserAccountId } from "../user";
-import MemoryId from "./memory-id";
-import Moment from "./moment";
-import Rating from "./rating";
-import { Subject } from "./subject";
-import { PrivateMemory, PublicMemory, RestrictMemory, Visibility } from "./visibility";
+import { Entity } from '../../util'
+import { UserAccountId } from '../user'
+import MemoryId from './memory-id'
+import Moment from './moment'
+import Rating from './rating'
+import { Subject } from './subject'
+import { PrivateMemory, PublicMemory, Visibility } from './visibility'
 
 export default class Memory extends Entity<MemoryId> {
     private readonly _moments: Moment[] 
@@ -26,7 +26,7 @@ export default class Memory extends Entity<MemoryId> {
 
     rememberMoment(moment: Moment) {
         if (this.moments.includes(moment)) return
-        this.moments.push(moment);
+        this.moments.push(moment)
     }
 
     forgetMoment(moment: Moment) {

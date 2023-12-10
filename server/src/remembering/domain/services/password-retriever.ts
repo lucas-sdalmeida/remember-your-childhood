@@ -1,4 +1,4 @@
-import { EncryptedPassword } from "../model/user/password";
+import { EncryptedPassword } from '../model/user/password'
 
 export default interface PasswordRetriever {
     isEncryptedPassword(possiblyEncryptedPassword: string): boolean

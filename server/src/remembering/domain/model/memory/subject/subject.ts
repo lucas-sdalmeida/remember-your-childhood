@@ -1,6 +1,6 @@
-import ReleaseDate from "./release-date";
-import SubjectType from "./subject-type";
-import Title from "./title";
+import ReleaseDate from './release-date'
+import SubjectType from './subject-type'
+import Title from './title'
 
 export default class Subject {
     constructor(

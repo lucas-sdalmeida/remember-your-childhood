@@ -1,4 +1,4 @@
-import Identifier from "./identifier";
-import Entity from "./entity";
+import Identifier from './identifier'
+import Entity from './entity'
 
 export { Identifier, Entity }

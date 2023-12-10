@@ -1,11 +1,11 @@
-import express, { NextFunction } from "express";
-import { loginController, signupController } from "./controller/session";
-import { userController } from "./controller/user";
-import { memoryController } from "./controller/memory";
+import express from 'express'
+import { loginController, signupController } from './controller/session'
+import { userController } from './controller/user'
+import { memoryController } from './controller/memory'
 
 const PORT = process.env.port || 8080
 
-const app = express();
+const app = express()
 app.use(express.json())
 
 app.use('/api/v1/signup', signupController)

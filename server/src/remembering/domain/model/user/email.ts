@@ -1,4 +1,4 @@
-import { Notification } from "../../../../util/types"
+import { Notification } from '../../../../util/types'
 
 export default class Email {
     private constructor (

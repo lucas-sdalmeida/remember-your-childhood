@@ -1,8 +1,8 @@
-import { Entity } from "../../util";
-import Email from "./email";
-import { EncryptedPassword } from "./password";
-import UserAccountId from "./user-account-id";
-import Username from "./username";
+import { Entity } from '../../util'
+import Email from './email'
+import { EncryptedPassword } from './password'
+import UserAccountId from './user-account-id'
+import Username from './username'
 
 export default class UserAccount extends Entity<UserAccountId> {
     private readonly _followingList: UserAccountId[]

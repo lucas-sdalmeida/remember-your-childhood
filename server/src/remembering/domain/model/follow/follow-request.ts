@@ -1,8 +1,8 @@
-import { Notification } from "../../../../util/types";
-import { Entity } from "../../util";
-import { UserAccountId } from "../user";
-import FollowRequestId from "./request-id";
-import RequestStatus from "./request-status";
+import { Notification } from '../../../../util/types'
+import { Entity } from '../../util'
+import { UserAccountId } from '../user'
+import FollowRequestId from './request-id'
+import RequestStatus from './request-status'
 
 export default class FollowRequest extends Entity<FollowRequestId> {
     private _status: RequestStatus
@@ -27,8 +27,8 @@ export default class FollowRequest extends Entity<FollowRequestId> {
     }
 
     static existentRequest(id: FollowRequestId, requester: UserAccountId, receiver: UserAccountId, status: RequestStatus, 
-                            requestDate: Date, answerDate?: Date) {
-        const notification = FollowRequest.validate(status, requestDate, answerDate);
+        requestDate: Date, answerDate?: Date) {
+        const notification = FollowRequest.validate(status, requestDate, answerDate)
         
         if (notification.hasErrors()) throw new Error(notification.message)
 
@@ -53,7 +53,7 @@ export default class FollowRequest extends Entity<FollowRequestId> {
 
     accept() {
         if (this._status == 'ACCEPTED') return
-        if (this._status != 'PENDING') throw new Error(`Unable to accept a request that has already been answered!`)
+        if (this._status != 'PENDING') throw new Error('Unable to accept a request that has already been answered!')
     
         this._status = 'ACCEPTED'
         this._answerDate = new Date()
@@ -61,14 +61,14 @@ export default class FollowRequest extends Entity<FollowRequestId> {
 
     refuse() {
         if (this._status == 'REFUSED') return
-        if (this._status != 'PENDING') throw new Error(`Unable to refuse a request that has already been answered!`)
+        if (this._status != 'PENDING') throw new Error('Unable to refuse a request that has already been answered!')
 
         this._status = 'REFUSED'
         this._answerDate = new Date()
     }
 
     unfollow() {
-        if (this._status != 'ACCEPTED') throw new Error(`Unable to unfollow a user which request has never been accepted!`)
+        if (this._status != 'ACCEPTED') throw new Error('Unable to unfollow a user which request has never been accepted!')
         this._status = 'UNFOLLOWED'
         this._answerDate = new Date()
     }
