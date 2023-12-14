@@ -17,7 +17,7 @@ import { RequestModel as CreateMemoryRequestModel } from './application/memory/c
 import CreateMemoryServiceImpl from './application/memory/create/v1/create-memory-service-impl'
 import FindOneMemoryServiceImpl from './application/memory/find/v1/find-one-memory-impl'
 import FindAllMemoriesServiceImpl from './application/memory/find/v1/find-all-memories-impl'
-import { UpdateMemoryRequestModel } from './application/memory/update/memory/'
+import { UpdateMemoryRequestModel } from './application/memory/update/memory'
 import UpdateMemoryServiceImpl from './application/memory/update/memory/v1/update-memory-service-impl'
 import AllowEveryoneToSeeServiceImpl from './application/memory/update/visibility/v1/allow-everyone-to-see-service-impl'
 import AllowUserToSeeServiceImpl from './application/memory/update/visibility/v1/allow-user-to-see-service-impl'
