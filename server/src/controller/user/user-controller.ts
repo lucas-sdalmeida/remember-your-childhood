@@ -1,11 +1,11 @@
-import { Request, Response, Router } from "express";
-import { AuthenticatorServiceImpl, BlockUserServiceImpl, DeleteMemoryServiceImpl, DeleteUserServiceImpl, FindAllUsersServiceImpl, FindOneUserServiceImpl } from "../../remembering";
-import InMemoryUserRepository from "../../persistence/inmemory/user/inmemory-user-repository";
-import { getCredentials } from "../shared/security/token/utils";
-import JwtEncrypter from "../shared/security/token/jwt/jwt-encrypter";
-import { UUIDV4 } from "../shared";
-import InMemoryMemoryRepository from "../../persistence/inmemory/memory/inmemory-memory-repository";
-import { BcryptedPasswordRetriever } from "../shared/security/password";
+import { Request, Response, Router } from 'express'
+import { AuthenticatorServiceImpl, BlockUserServiceImpl, DeleteMemoryServiceImpl, DeleteUserServiceImpl, FindAllUsersServiceImpl, FindOneUserServiceImpl } from '../../remembering'
+import InMemoryUserRepository from '../../persistence/inmemory/user/inmemory-user-repository'
+import { getCredentials } from '../shared/security/token/utils'
+import JwtEncrypter from '../shared/security/token/jwt/jwt-encrypter'
+import { UUIDV4 } from '../shared'
+import InMemoryMemoryRepository from '../../persistence/inmemory/memory/inmemory-memory-repository'
+import { BcryptedPasswordRetriever } from '../shared/security/password'
 
 const tokenEncrypter = new JwtEncrypter()
 

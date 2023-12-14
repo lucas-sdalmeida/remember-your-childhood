@@ -1,13 +1,13 @@
-import { NextFunction, Request, Response, Router } from "express";
-import { AddMomentServiceImpl, AllowEveryoneToSeeServiceImpl, AllowUserToSeeServiceImpl, AuthenticatorServiceImpl, BlockEveryoneToSeeServiceImpl, BlockUserToSeeServiceImpl, CreateMemoryServiceImpl, Credentials, DeleteMemoryServiceImpl, FindAllMemoriesServiceImpl, FindOneMemoryServiceImpl, UpdateMemoryServiceImpl } from "../../remembering";
-import { getCredentials } from "../shared/security/token/utils";
-import JwtEncrypter from "../shared/security/token/jwt/jwt-encrypter";
-import InMemoryUserRepository from "../../persistence/inmemory/user/inmemory-user-repository";
-import InMemoryMemoryRepository from "../../persistence/inmemory/memory/inmemory-memory-repository";
-import { UUIDGeneratorImpl, UUIDV4 } from "../shared";
-import { getCreateMemoryRequestModel, getUpdateMemoryRequestModel } from "./utils";
-import { Notification } from "../../util/types";
-import { BcryptedPasswordRetriever } from "../shared/security/password";
+import { NextFunction, Request, Response, Router } from 'express'
+import { AddMomentServiceImpl, AllowEveryoneToSeeServiceImpl, AllowUserToSeeServiceImpl, AuthenticatorServiceImpl, BlockEveryoneToSeeServiceImpl, BlockUserToSeeServiceImpl, CreateMemoryServiceImpl, Credentials, DeleteMemoryServiceImpl, FindAllMemoriesServiceImpl, FindOneMemoryServiceImpl, UpdateMemoryServiceImpl } from '../../remembering'
+import { getCredentials } from '../shared/security/token/utils'
+import JwtEncrypter from '../shared/security/token/jwt/jwt-encrypter'
+import InMemoryUserRepository from '../../persistence/inmemory/user/inmemory-user-repository'
+import InMemoryMemoryRepository from '../../persistence/inmemory/memory/inmemory-memory-repository'
+import { UUIDGeneratorImpl, UUIDV4 } from '../shared'
+import { getCreateMemoryRequestModel, getUpdateMemoryRequestModel } from './utils'
+import { Notification } from '../../util/types'
+import { BcryptedPasswordRetriever } from '../shared/security/password'
 
 const tokenEncrypter = new JwtEncrypter()
 
@@ -122,7 +122,7 @@ memoryController.get('/', async (requestModel: Request, response: Response) => {
 
         if (responseModel.length == 0) {
             response.status(404).send({
-                cause: `There is no memories you can see`,
+                cause: 'There is no memories you can see',
             })
         }
     }
@@ -228,7 +228,7 @@ memoryController.patch('/:id/moment', async (request: Request, response: Respons
         const { description } = request.body
 
         if (!description || typeof description != 'string') {
-            response.status(400).send({ cause: `The description of the memory must be given and must be a string!`})
+            response.status(400).send({ cause: 'The description of the memory must be given and must be a string!'})
             return
         }
 

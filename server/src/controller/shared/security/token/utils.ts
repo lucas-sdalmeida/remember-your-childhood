@@ -1,12 +1,12 @@
-import { join } from "path"
-import { promises as fs } from "fs"
+import { join } from 'path'
+import { promises as fs } from 'fs'
 
-import keysConfigs from "../../../../configs/keys-configs.json"
-import { Request } from "express"
-import EncryptedToken from "./encrypted-token"
-import TokenEncrypter from "./token-encrypter"
-import { Credentials } from "../../../../remembering"
-import UUIDV4 from "../../uuid-impl"
+import keysConfigs from '../../../../configs/keys-configs.json'
+import { Request } from 'express'
+import EncryptedToken from './encrypted-token'
+import TokenEncrypter from './token-encrypter'
+import { Credentials } from '../../../../remembering'
+import UUIDV4 from '../../uuid-impl'
 
 export const getPrivateKey = async () => {
     const srcFolder = getSrcFolder()

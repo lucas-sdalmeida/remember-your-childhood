@@ -1,2 +1,2 @@
-import memoryController from "./memory-controller";
+import memoryController from './memory-controller'
 export { memoryController }

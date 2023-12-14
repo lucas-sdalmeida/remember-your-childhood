@@ -1,5 +1,5 @@
-import { UUID } from "../../../../util/types";
-import FollowRequestDTO from "./follow-request-dto";
+import { UUID } from '../../../../util/types'
+import FollowRequestDTO from './follow-request-dto'
 
 export default interface FollowRequestRepository {
     create(request: FollowRequestDTO): Promise<void>

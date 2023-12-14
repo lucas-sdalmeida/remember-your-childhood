@@ -1,2 +1,2 @@
-import DeleteUserService from "./delete-user-service";
+import DeleteUserService from './delete-user-service'
 export { DeleteUserService }

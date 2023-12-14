@@ -15,7 +15,6 @@ export default class FollowRequest extends Entity<FollowRequestId> {
         public readonly receiver: UserAccountId,
         status: RequestStatus = 'PENDING',
         requestDate = new Date(),
-        answerDate?: Date,
     ) {
         super(id)
         this._status = status

@@ -1,14 +1,14 @@
-import { UUID } from "../../../../../util/types";
-import { UserAccountId } from "../../../../domain/model/user";
-import { PasswordRetriever } from "../../../../domain/services";
-import { AuthenticatorService } from "../../../session/auth";
-import Credentials from "../../../session/shared/credentials";
-import { UserRepository } from "../../../user/repository";
-import { userFromDTO } from "../../../user/repository/user-dto";
-import { memoryFromDTO } from "../../repository/memory-dto";
-import MemoryRepository from "../../repository/memory-repository";
-import FindOneMemoryService from "../find-one-memory-service";
-import ResponseModel from "../response-model";
+import { UUID } from '../../../../../util/types'
+import { UserAccountId } from '../../../../domain/model/user'
+import { PasswordRetriever } from '../../../../domain/services'
+import { AuthenticatorService } from '../../../session/auth'
+import Credentials from '../../../session/shared/credentials'
+import { UserRepository } from '../../../user/repository'
+import { userFromDTO } from '../../../user/repository/user-dto'
+import { memoryFromDTO } from '../../repository/memory-dto'
+import MemoryRepository from '../../repository/memory-repository'
+import FindOneMemoryService from '../find-one-memory-service'
+import ResponseModel from '../response-model'
 
 export default class FindOneMemoryServiceImpl implements FindOneMemoryService {
     constructor (

@@ -1,10 +1,10 @@
-import { Request, Response, Router } from "express";
-import { CreateUserRequestModel, CreateUserServiceImpl, SignUpServideImpl } from "../../remembering";
-import InMemoryUserRepository from "../../persistence/inmemory/user/inmemory-user-repository";
-import { UUIDGeneratorImpl } from "../shared";
-import { BcryptedPasswordEncrypter } from "../shared/security/password";
-import Token from "../shared/security/token/token";
-import JwtEncrypter from "../shared/security/token/jwt/jwt-encrypter";
+import { Request, Response, Router } from 'express'
+import { CreateUserRequestModel, CreateUserServiceImpl, SignUpServideImpl } from '../../remembering'
+import InMemoryUserRepository from '../../persistence/inmemory/user/inmemory-user-repository'
+import { UUIDGeneratorImpl } from '../shared'
+import { BcryptedPasswordEncrypter } from '../shared/security/password'
+import Token from '../shared/security/token/token'
+import JwtEncrypter from '../shared/security/token/jwt/jwt-encrypter'
 
 const tokenEncrypter = new JwtEncrypter()
 const userRepository = new InMemoryUserRepository()

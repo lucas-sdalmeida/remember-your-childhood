@@ -1,4 +1,4 @@
-import MemoryDTO from "../repository/memory-dto"
+import MemoryDTO from '../repository/memory-dto'
 
 type ResponseModel = {
     memory: MemoryDTO,

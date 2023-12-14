@@ -1,12 +1,10 @@
-import { UUID } from "../../../../../../util/types";
-import { PasswordRetriever } from "../../../../../domain/services";
-import { AuthenticatorService } from "../../../../session/auth";
-import Credentials from "../../../../session/shared/credentials";
-import { userFromDTO } from "../../../../user/repository/user-dto";
-import { memoryFromDTO, memoryToDTO } from "../../../repository/memory-dto";
-import MemoryRepository from "../../../repository/memory-repository";
-import ResponseModel from "../../response-model";
-import AllowToEveryoneSeeService from "../allow-everyone-to-see-service";
+import { UUID } from '../../../../../../util/types'
+import { AuthenticatorService } from '../../../../session/auth'
+import Credentials from '../../../../session/shared/credentials'
+import { memoryFromDTO, memoryToDTO } from '../../../repository/memory-dto'
+import MemoryRepository from '../../../repository/memory-repository'
+import ResponseModel from '../../response-model'
+import AllowToEveryoneSeeService from '../allow-everyone-to-see-service'
 
 export default class AllowEveryoneToSeeServiceImpl implements AllowToEveryoneSeeService {
     constructor (

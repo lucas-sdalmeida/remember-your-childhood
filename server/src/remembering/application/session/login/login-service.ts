@@ -1,4 +1,4 @@
-import Credentials from "../shared/credentials"
+import Credentials from '../shared/credentials'
 
 export default interface LoginService {
     login(model: RequestModel): Promise<Credentials>

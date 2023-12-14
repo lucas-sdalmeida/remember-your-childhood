@@ -1,13 +1,13 @@
-import { UUID } from "../../../../../../util/types";
-import { Moment } from "../../../../../domain/model/memory";
-import { PasswordRetriever } from "../../../../../domain/services";
-import { AuthenticatorService } from "../../../../session/auth";
-import Credentials from "../../../../session/shared/credentials";
-import { userFromDTO } from "../../../../user/repository/user-dto";
-import { memoryFromDTO, memoryToDTO } from "../../../repository/memory-dto";
-import MemoryRepository from "../../../repository/memory-repository";
-import ResponseModel from "../../response-model";
-import AddMomentService, { RequestModel } from "../add-moment-service";
+import { UUID } from '../../../../../../util/types'
+import { Moment } from '../../../../../domain/model/memory'
+import { PasswordRetriever } from '../../../../../domain/services'
+import { AuthenticatorService } from '../../../../session/auth'
+import Credentials from '../../../../session/shared/credentials'
+import { userFromDTO } from '../../../../user/repository/user-dto'
+import { memoryFromDTO, memoryToDTO } from '../../../repository/memory-dto'
+import MemoryRepository from '../../../repository/memory-repository'
+import ResponseModel from '../../response-model'
+import AddMomentService, { RequestModel } from '../add-moment-service'
 
 export default class AddMomentServiceImpl implements AddMomentService {
     constructor (

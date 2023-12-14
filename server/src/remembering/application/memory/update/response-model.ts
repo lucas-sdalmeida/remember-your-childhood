@@ -1,4 +1,4 @@
-import { UUID } from "../../../../util/types"
+import { UUID } from '../../../../util/types'
 
 type ResponseModel = {
     id: UUID,

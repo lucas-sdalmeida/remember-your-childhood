@@ -1,8 +1,8 @@
-import EncryptedToken from "../encrypted-token";
-import Token from "../token";
-import TokenEncrypter from "../token-encrypter";
-import { JwtPayload, VerifyErrors, sign, verify } from "jsonwebtoken";
-import { getPrivateKey, getPublicKey } from "../utils";
+import EncryptedToken from '../encrypted-token'
+import Token from '../token'
+import TokenEncrypter from '../token-encrypter'
+import { JwtPayload, VerifyErrors, sign, verify } from 'jsonwebtoken'
+import { getPrivateKey, getPublicKey } from '../utils'
 
 export default class JwtEncrypter implements TokenEncrypter {
     async encrypt(token: Token): Promise<EncryptedToken> {
@@ -30,7 +30,7 @@ export default class JwtEncrypter implements TokenEncrypter {
     private verifyToken(token: EncryptedToken, publicKey: string, resolve: (value: Token | PromiseLike<Token>) => void) {
         verify(token, publicKey, { algorithms: [ 'RS256' ] }, (error: VerifyErrors | null, decoded?: string | JwtPayload) => {
             if (error) throw error
-            if (!decoded) throw new Error(`Could not decrypt the token!`)
+            if (!decoded) throw new Error('Could not decrypt the token!')
             
             const decodedToken = typeof decoded == 'string' ? JSON.parse(decoded) : decoded
             if (!(decodedToken instanceof Token)) throw new Error(`Invalid token ${token}`)

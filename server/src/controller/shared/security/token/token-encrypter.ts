@@ -1,5 +1,5 @@
-import EncryptedToken from "./encrypted-token";
-import Token from "./token";
+import EncryptedToken from './encrypted-token'
+import Token from './token'
 
 export default interface TokenEncrypter {
     encrypt(token: Token): Promise<EncryptedToken>

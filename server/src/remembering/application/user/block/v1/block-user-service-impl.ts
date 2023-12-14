@@ -1,10 +1,10 @@
-import { UUID } from "../../../../../util/types";
-import { PasswordRetriever } from "../../../../domain/services";
-import { AuthenticatorService } from "../../../session/auth";
-import Credentials from "../../../session/shared/credentials";
-import { UserRepository } from "../../repository";
-import { userFromDTO, userToDTO } from "../../repository/user-dto";
-import BlockUserService from "../block-user-service";
+import { UUID } from '../../../../../util/types'
+import { PasswordRetriever } from '../../../../domain/services'
+import { AuthenticatorService } from '../../../session/auth'
+import Credentials from '../../../session/shared/credentials'
+import { UserRepository } from '../../repository'
+import { userFromDTO, userToDTO } from '../../repository/user-dto'
+import BlockUserService from '../block-user-service'
 
 export default class BlockUserServiceImpl implements BlockUserService {
     constructor (

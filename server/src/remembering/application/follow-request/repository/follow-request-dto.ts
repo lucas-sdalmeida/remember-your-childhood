@@ -1,6 +1,6 @@
-import { UUID } from "../../../../util/types"
-import { FollowRequest, FollowRequestId } from "../../../domain/model/follow"
-import { UserAccountId } from "../../../domain/model/user"
+import { UUID } from '../../../../util/types'
+import { FollowRequest, FollowRequestId } from '../../../domain/model/follow'
+import { UserAccountId } from '../../../domain/model/user'
 
 type FollowRequestDTO = {
     id: number,

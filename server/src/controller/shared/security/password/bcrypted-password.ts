@@ -1,4 +1,4 @@
-import { EncryptedPassword } from "../../../../remembering";
+import { EncryptedPassword } from '../../../../remembering'
 
 export default class BcryptedPassword extends EncryptedPassword {
     private constructor (

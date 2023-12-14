@@ -1,13 +1,13 @@
-import { UUID } from "../../../../../util/types";
-import { FollowRequest } from "../../../../domain/model/follow";
-import { PasswordRetriever } from "../../../../domain/services";
-import { AuthenticatorService } from "../../../session/auth";
-import Credentials from "../../../session/shared/credentials";
-import { UserRepository } from "../../../user/repository";
-import { userFromDTO, userToDTO } from "../../../user/repository/user-dto";
-import { FollowRequestRepository } from "../../repository";
-import { followRequestFromDTO, followRequestToDTO } from "../../repository/follow-request-dto";
-import AnswerRequestService from "../answer-request-service";
+import { UUID } from '../../../../../util/types'
+import { FollowRequest } from '../../../../domain/model/follow'
+import { PasswordRetriever } from '../../../../domain/services'
+import { AuthenticatorService } from '../../../session/auth'
+import Credentials from '../../../session/shared/credentials'
+import { UserRepository } from '../../../user/repository'
+import { userFromDTO, userToDTO } from '../../../user/repository/user-dto'
+import { FollowRequestRepository } from '../../repository'
+import { followRequestFromDTO, followRequestToDTO } from '../../repository/follow-request-dto'
+import AnswerRequestService from '../answer-request-service'
 
 export default class AsnwerRequestServiceImpl implements AnswerRequestService {
     constructor (

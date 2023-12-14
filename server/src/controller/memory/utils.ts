@@ -1,7 +1,7 @@
-import { Request } from "express";
-import { CreateMemoryRequestModel, UpdateMemoryRequestModel } from "../../remembering";
-import { Notification, UUID } from "../../util/types";
-import { UUIDV4 } from "../shared";
+import { Request } from 'express'
+import { CreateMemoryRequestModel, UpdateMemoryRequestModel } from '../../remembering'
+import { Notification, UUID } from '../../util/types'
+import { UUIDV4 } from '../shared'
 
 export const getCreateMemoryRequestModel = (request: Request): CreateMemoryRequestModel | Notification => {
     const notification = new Notification()
@@ -56,7 +56,7 @@ const getSubject = (request: Request) => {
     const { subject } = request.body
 
     if (!subject) {
-        notification.addError(`The memory subject must be given!`)
+        notification.addError('The memory subject must be given!')
         return notification
     }
 
@@ -67,7 +67,7 @@ const getSubject = (request: Request) => {
         notification.addError(`The subject's type must be 'MOVIE', 'ANIMATION', 'BOOK', 'HQ' or 'SERIES'. Provided: ${subject.type}`)
     }
     if (subject.releaseDate && isNaN(new Date(subject.releaseDate).getTime())) {
-        notification.addError(`If the subject release is provided, it must be a valid ISO formatted date string! Provided` + 
+        notification.addError('If the subject release is provided, it must be a valid ISO formatted date string! Provided' + 
             ` ${subject.releaseDate}`)
     }
     if (notification.hasErrors()) return notification
@@ -99,7 +99,7 @@ const getAffectionLevel = (request: Request) => {
     const { affectionLevel } = request.body
 
     if (!affectionLevel) {
-        notification.addError(`The affection level must be given`)
+        notification.addError('The affection level must be given')
         return notification
     }
     if (typeof affectionLevel != 'number') {
@@ -114,7 +114,7 @@ const getVisibility = (request: Request) => {
     const { visibility } = request.body
 
     if (!visibility) {
-        notification.addError(`The visibility must be given!`)
+        notification.addError('The visibility must be given!')
         return notification
     }
     if (!visibility.type || typeof visibility.type != 'string') {

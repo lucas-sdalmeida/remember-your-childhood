@@ -1,9 +1,9 @@
-import { UUID } from "../../../../../util/types";
-import { DeleteMemoryService } from "../../../memory/delete";
-import { AuthenticatorService } from "../../../session/auth";
-import Credentials from "../../../session/shared/credentials";
-import { UserRepository } from "../../repository";
-import DeleteUserService from "../delete-user-service";
+import { UUID } from '../../../../../util/types'
+import { DeleteMemoryService } from '../../../memory/delete'
+import { AuthenticatorService } from '../../../session/auth'
+import Credentials from '../../../session/shared/credentials'
+import { UserRepository } from '../../repository'
+import DeleteUserService from '../delete-user-service'
 
 export default class DeleteUserServiceImpl implements DeleteUserService {
     constructor (

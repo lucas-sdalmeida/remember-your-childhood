@@ -1,14 +1,14 @@
-import { UUID } from "../../../../../../util/types";
-import { UserAccountId } from "../../../../../domain/model/user";
-import { PasswordRetriever } from "../../../../../domain/services";
-import { AuthenticatorService } from "../../../../session/auth";
-import Credentials from "../../../../session/shared/credentials";
-import { UserRepository } from "../../../../user/repository";
-import { userFromDTO } from "../../../../user/repository/user-dto";
-import { memoryFromDTO, memoryToDTO } from "../../../repository/memory-dto";
-import MemoryRepository from "../../../repository/memory-repository";
-import ResponseModel from "../../response-model";
-import BlockUserToSeeService from "../block-user-to-see";
+import { UUID } from '../../../../../../util/types'
+import { UserAccountId } from '../../../../../domain/model/user'
+import { PasswordRetriever } from '../../../../../domain/services'
+import { AuthenticatorService } from '../../../../session/auth'
+import Credentials from '../../../../session/shared/credentials'
+import { UserRepository } from '../../../../user/repository'
+import { userFromDTO } from '../../../../user/repository/user-dto'
+import { memoryFromDTO, memoryToDTO } from '../../../repository/memory-dto'
+import MemoryRepository from '../../../repository/memory-repository'
+import ResponseModel from '../../response-model'
+import BlockUserToSeeService from '../block-user-to-see'
 
 export default class BlockUserToSeeServiceImpl implements BlockUserToSeeService {
     constructor (

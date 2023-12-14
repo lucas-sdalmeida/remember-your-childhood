@@ -1,2 +1,2 @@
-import DeleteMemoryService from "./delete-memory-service";
+import DeleteMemoryService from './delete-memory-service'
 export { DeleteMemoryService }

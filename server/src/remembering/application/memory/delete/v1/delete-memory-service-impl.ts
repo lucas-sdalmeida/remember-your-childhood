@@ -1,10 +1,9 @@
-import { UUID } from "../../../../../util/types";
-import { AuthenticatorService } from "../../../session/auth";
-import Credentials from "../../../session/shared/credentials";
-import { UserRepository } from "../../../user/repository";
-import { memoryFromDTO } from "../../repository/memory-dto";
-import MemoryRepository from "../../repository/memory-repository";
-import DeleteMemoryService from "../delete-memory-service";
+import { UUID } from '../../../../../util/types'
+import { AuthenticatorService } from '../../../session/auth'
+import Credentials from '../../../session/shared/credentials'
+import { memoryFromDTO } from '../../repository/memory-dto'
+import MemoryRepository from '../../repository/memory-repository'
+import DeleteMemoryService from '../delete-memory-service'
 
 export default class DeleteMemoryServiceImpl implements DeleteMemoryService {
     constructor (

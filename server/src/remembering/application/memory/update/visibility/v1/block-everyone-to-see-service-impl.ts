@@ -1,10 +1,10 @@
-import { UUID } from "../../../../../../util/types";
-import { AuthenticatorService } from "../../../../session/auth";
-import Credentials from "../../../../session/shared/credentials";
-import { memoryFromDTO, memoryToDTO } from "../../../repository/memory-dto";
-import MemoryRepository from "../../../repository/memory-repository";
-import ResponseModel from "../../response-model";
-import BlockEveryoneToSeeService from "../block-everyone-to-see-service";
+import { UUID } from '../../../../../../util/types'
+import { AuthenticatorService } from '../../../../session/auth'
+import Credentials from '../../../../session/shared/credentials'
+import { memoryFromDTO, memoryToDTO } from '../../../repository/memory-dto'
+import MemoryRepository from '../../../repository/memory-repository'
+import ResponseModel from '../../response-model'
+import BlockEveryoneToSeeService from '../block-everyone-to-see-service'
 
 export default class BlockEveryoneToSeeServiceImpl implements BlockEveryoneToSeeService {
     constructor (

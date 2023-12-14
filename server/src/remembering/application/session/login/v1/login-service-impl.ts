@@ -1,11 +1,11 @@
-import { UserAccount, Username } from "../../../../domain/model/user";
-import Email from "../../../../domain/model/user/email";
-import { RawPassword } from "../../../../domain/model/user/password";
-import { PasswordChecker, PasswordRetriever } from "../../../../domain/services";
-import { UserAccountDTO, UserRepository } from "../../../user/repository";
-import { userFromDTO } from "../../../user/repository/user-dto";
-import Credentials, { createCredentials } from "../../shared/credentials";
-import LoginService, { RequestModel } from "../login-service";
+import { UserAccount, Username } from '../../../../domain/model/user'
+import Email from '../../../../domain/model/user/email'
+import { RawPassword } from '../../../../domain/model/user/password'
+import { PasswordChecker, PasswordRetriever } from '../../../../domain/services'
+import { UserAccountDTO, UserRepository } from '../../../user/repository'
+import { userFromDTO } from '../../../user/repository/user-dto'
+import Credentials, { createCredentials } from '../../shared/credentials'
+import LoginService, { RequestModel } from '../login-service'
 
 export default class LoginServiceImpl implements LoginService {
     constructor (

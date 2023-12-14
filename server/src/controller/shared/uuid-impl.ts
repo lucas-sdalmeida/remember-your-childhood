@@ -1,4 +1,4 @@
-import { UUID as AbstractUUID } from "../../util/types";
+import { UUID as AbstractUUID } from '../../util/types'
 import { parse, v4 as uuid, validate } from 'uuid'
 
 export default class UUIDV4 extends AbstractUUID {

@@ -1,14 +1,14 @@
-import { UUID } from "../../../../../../util/types";
-import { Rating } from "../../../../../domain/model/memory";
-import { ReleaseDate, Subject, Title } from "../../../../../domain/model/memory/subject";
-import { PasswordRetriever } from "../../../../../domain/services";
-import { AuthenticatorService } from "../../../../session/auth";
-import Credentials from "../../../../session/shared/credentials";
-import { userFromDTO } from "../../../../user/repository/user-dto";
-import { memoryFromDTO, memoryToDTO } from "../../../repository/memory-dto";
-import MemoryRepository from "../../../repository/memory-repository";
-import ResponseModel from "../../response-model";
-import UpdateMemoryService, { RequestModel } from "../update-memory-service";
+import { UUID } from '../../../../../../util/types'
+import { Rating } from '../../../../../domain/model/memory'
+import { ReleaseDate, Subject, Title } from '../../../../../domain/model/memory/subject'
+import { PasswordRetriever } from '../../../../../domain/services'
+import { AuthenticatorService } from '../../../../session/auth'
+import Credentials from '../../../../session/shared/credentials'
+import { userFromDTO } from '../../../../user/repository/user-dto'
+import { memoryFromDTO, memoryToDTO } from '../../../repository/memory-dto'
+import MemoryRepository from '../../../repository/memory-repository'
+import ResponseModel from '../../response-model'
+import UpdateMemoryService, { RequestModel } from '../update-memory-service'
 
 export default class UpdateMemoryServiceImpl implements UpdateMemoryService {
     constructor (

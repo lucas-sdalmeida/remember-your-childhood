@@ -1,13 +1,13 @@
-import { UUID } from "../../../../../util/types";
-import { UserAccount, UserAccountId } from "../../../../domain/model/user";
-import { PasswordRetriever } from "../../../../domain/services";
-import { AuthenticatorService } from "../../../session/auth";
-import Credentials from "../../../session/shared/credentials";
-import { UserRepository } from "../../../user/repository";
-import { userFromDTO, userToDTO } from "../../../user/repository/user-dto";
-import { FollowRequestRepository } from "../../repository";
-import { followRequestFromDTO, followRequestToDTO } from "../../repository/follow-request-dto";
-import UnfollowService from "../unfollow-service";
+import { UUID } from '../../../../../util/types'
+import { UserAccount, UserAccountId } from '../../../../domain/model/user'
+import { PasswordRetriever } from '../../../../domain/services'
+import { AuthenticatorService } from '../../../session/auth'
+import Credentials from '../../../session/shared/credentials'
+import { UserRepository } from '../../../user/repository'
+import { userFromDTO, userToDTO } from '../../../user/repository/user-dto'
+import { FollowRequestRepository } from '../../repository'
+import { followRequestFromDTO, followRequestToDTO } from '../../repository/follow-request-dto'
+import UnfollowService from '../unfollow-service'
 
 export default class UnfollowServiceImpl implements UnfollowService {
     constructor (

@@ -1,5 +1,4 @@
-import { UUID } from "../../../../util/types"
-import { UserAccountDTO } from "../repository"
+import { UUID } from '../../../../util/types'
 
 type ResponseModel = {
     user: {

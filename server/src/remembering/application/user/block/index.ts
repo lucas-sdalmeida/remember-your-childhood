@@ -1,2 +1,2 @@
-import BlockUserService from "./block-user-service";
+import BlockUserService from './block-user-service'
 export { BlockUserService }

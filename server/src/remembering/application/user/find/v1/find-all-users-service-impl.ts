@@ -1,8 +1,8 @@
-import { AuthenticatorService } from "../../../session/auth";
-import Credentials from "../../../session/shared/credentials";
-import { UserRepository } from "../../repository";
-import FindAllUsersService from "../find-all-users-service";
-import ResponseModel from "../response-model";
+import { AuthenticatorService } from '../../../session/auth'
+import Credentials from '../../../session/shared/credentials'
+import { UserRepository } from '../../repository'
+import FindAllUsersService from '../find-all-users-service'
+import ResponseModel from '../response-model'
 
 export default class FindAllUsersServiceImpl implements FindAllUsersService {
     constructor (

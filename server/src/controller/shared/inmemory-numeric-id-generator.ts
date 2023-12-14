@@ -1,6 +1,6 @@
-import InMemoryFollowRequestRepository from "../../persistence/inmemory/follor-request/inmemory-follow-request-repository";
-import { NumericIdGenerator } from "../../remembering";
-import { UUID } from "../../util/types";
+import InMemoryFollowRequestRepository from '../../persistence/inmemory/follor-request/inmemory-follow-request-repository'
+import { NumericIdGenerator } from '../../remembering'
+import { UUID } from '../../util/types'
 
 export default class InMemoryNumericIdGenerator implements NumericIdGenerator {
     constructor (

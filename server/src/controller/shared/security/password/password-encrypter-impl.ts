@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
-import { EncryptedPassword, PasswordEncrypter } from "../../../../remembering";
-import { RawPassword } from "../../../../remembering/domain/model/user/password";
-import BcryptedPassword from "./bcrypted-password";
+import { EncryptedPassword, PasswordEncrypter } from '../../../../remembering'
+import { RawPassword } from '../../../../remembering/domain/model/user/password'
+import BcryptedPassword from './bcrypted-password'
 
 export default class BcryptedPasswordEncrypter implements PasswordEncrypter {
     async encrypt(rawPassword: RawPassword): Promise<EncryptedPassword> {

@@ -1,10 +1,10 @@
-import { UUID } from "../../../../util/types";
-import { Memory, MemoryId, Moment, Rating } from "../../../domain/model/memory";
-import { ReleaseDate, Subject, Title } from "../../../domain/model/memory/subject";
-import { PrivateMemory, PublicMemory, RestrictMemory, Visibility } from "../../../domain/model/memory/visibility";
-import BlockedMemory from "../../../domain/model/memory/visibility/blocked-memory";
-import { UserAccountId } from "../../../domain/model/user";
-import Credentials from "../../session/shared/credentials";
+import { UUID } from '../../../../util/types'
+import { Memory, MemoryId, Moment, Rating } from '../../../domain/model/memory'
+import { ReleaseDate, Subject, Title } from '../../../domain/model/memory/subject'
+import { PrivateMemory, PublicMemory, RestrictMemory, Visibility } from '../../../domain/model/memory/visibility'
+import BlockedMemory from '../../../domain/model/memory/visibility/blocked-memory'
+import { UserAccountId } from '../../../domain/model/user'
+import Credentials from '../../session/shared/credentials'
 
 export default interface CreateMemoryService {
     create(ownerId: UUID, model: RequestModel, credentials: Credentials): Promise<ResponseModel>
@@ -48,26 +48,26 @@ const getVisibility = (ownerId: UserAccountId, { visibility }: RequestModel) => 
     let memoVisibility: Visibility
 
     switch (visibility.type.toLowerCase()) {
-        case 'public':
-            memoVisibility = new PublicMemory(ownerId)
-            break;
-        case 'private':
-            memoVisibility = new PrivateMemory(ownerId)
-            break;
-        case 'restrict':
-            memoVisibility = new RestrictMemory(
-                ownerId,
-                visibility.target.map(id => new UserAccountId(id)),
-            )
-            break;
-        case 'blocked':
-            memoVisibility = new BlockedMemory(
-                ownerId,
-                visibility.target.map(id => new UserAccountId(id)),
-            )
-            break
-        default:
-            throw new Error(`${visibility.type} is not a valid visibility!`)
+    case 'public':
+        memoVisibility = new PublicMemory(ownerId)
+        break
+    case 'private':
+        memoVisibility = new PrivateMemory(ownerId)
+        break
+    case 'restrict':
+        memoVisibility = new RestrictMemory(
+            ownerId,
+            visibility.target.map(id => new UserAccountId(id)),
+        )
+        break
+    case 'blocked':
+        memoVisibility = new BlockedMemory(
+            ownerId,
+            visibility.target.map(id => new UserAccountId(id)),
+        )
+        break
+    default:
+        throw new Error(`${visibility.type} is not a valid visibility!`)
     }
 
     return memoVisibility

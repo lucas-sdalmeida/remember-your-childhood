@@ -1,7 +1,7 @@
-import Credentials from "../../shared/credentials";
-import { UserAccountDTO, UserRepository } from "../../../user/repository";
-import AuthenticationError from "../authentication-error";
-import AuthenticatorService from "../authenticator-service";
+import Credentials from '../../shared/credentials'
+import { UserAccountDTO, UserRepository } from '../../../user/repository'
+import AuthenticationError from '../authentication-error'
+import AuthenticatorService from '../authenticator-service'
 
 export default class AuthenticatorServiceImpl implements AuthenticatorService {
     constructor (

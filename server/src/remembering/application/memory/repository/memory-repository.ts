@@ -1,5 +1,5 @@
-import { UUID } from "../../../../util/types";
-import MemoryDTO from "./memory-dto";
+import { UUID } from '../../../../util/types'
+import MemoryDTO from './memory-dto'
 
 export default interface MemoryRepository {
     create(memory: MemoryDTO): Promise<void>

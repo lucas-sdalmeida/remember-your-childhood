@@ -1,2 +1,2 @@
-import UnfollowService from "./unfollow-service";
+import UnfollowService from './unfollow-service'
 export { UnfollowService }

@@ -1,3 +1,3 @@
-import CreateUserService, { RequestModel } from "./create-user-service";
+import CreateUserService, { RequestModel } from './create-user-service'
 
 export { CreateUserService, RequestModel }

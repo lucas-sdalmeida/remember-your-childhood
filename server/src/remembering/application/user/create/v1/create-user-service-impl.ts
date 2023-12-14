@@ -1,7 +1,7 @@
-import { RawPassword } from "../../../../domain/model/user/password";
-import { PasswordEncrypter, UUIDGenerator } from "../../../../domain/services";
-import { UserRepository, userToDTO } from "../../repository";
-import CreateUserService, { RequestModel, ResponseModel, userFromRequestModel } from "../create-user-service";
+import { RawPassword } from '../../../../domain/model/user/password'
+import { PasswordEncrypter, UUIDGenerator } from '../../../../domain/services'
+import { UserRepository, userToDTO } from '../../repository'
+import CreateUserService, { RequestModel, ResponseModel, userFromRequestModel } from '../create-user-service'
 
 export default class CreateUserServiceImpl implements CreateUserService {
     constructor (

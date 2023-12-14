@@ -1,9 +1,9 @@
-import { UUID } from "../../../../util/types"
-import { Memory, MemoryId, Moment, Rating } from "../../../domain/model/memory"
-import { ReleaseDate, Subject, Title } from "../../../domain/model/memory/subject"
-import { PrivateMemory, PublicMemory, RestrictMemory, Visibility } from "../../../domain/model/memory/visibility"
-import BlockedMemory from "../../../domain/model/memory/visibility/blocked-memory"
-import { UserAccountId } from "../../../domain/model/user"
+import { UUID } from '../../../../util/types'
+import { Memory, MemoryId, Moment, Rating } from '../../../domain/model/memory'
+import { ReleaseDate, Subject, Title } from '../../../domain/model/memory/subject'
+import { PrivateMemory, PublicMemory, RestrictMemory, Visibility } from '../../../domain/model/memory/visibility'
+import BlockedMemory from '../../../domain/model/memory/visibility/blocked-memory'
+import { UserAccountId } from '../../../domain/model/user'
 
 type MemoryDTO = {
     id: UUID,
@@ -45,7 +45,7 @@ const visibilityToDTO = ({ visibility }: Memory) => {
     let target: UUID[] = []
 
     if (visibility instanceof PublicMemory || visibility instanceof PrivateMemory) {
-        type = visibility.toString().split(" ")[0]
+        type = visibility.toString().split(' ')[0]
     }
     if (visibility instanceof RestrictMemory) {
         type = 'restrict'
@@ -84,25 +84,25 @@ const visibilityFromDTO = (ownerId: UserAccountId, { visibility }: MemoryDTO) =>
     let memoVisibility: Visibility
 
     switch (visibility.type) {
-        case 'public':
-            memoVisibility = new PublicMemory(ownerId)
-            break
-        case 'private':
-            memoVisibility = new PrivateMemory(ownerId)
-        case 'restrict':
-            memoVisibility = new RestrictMemory(
-                ownerId,
-                visibility.target.map(id => new UserAccountId(id)),
-            )
-            break
-        case 'blocked':
-            memoVisibility = new BlockedMemory(
-                ownerId,
-                visibility.target.map(id => new UserAccountId(id))
-            )
-            break
-        default:
-            throw new Error(`Invalid visibility type ${ visibility.type }`)
+    case 'public':
+        memoVisibility = new PublicMemory(ownerId)
+        break
+    case 'private':
+        memoVisibility = new PrivateMemory(ownerId)
+    case 'restrict':
+        memoVisibility = new RestrictMemory(
+            ownerId,
+            visibility.target.map(id => new UserAccountId(id)),
+        )
+        break
+    case 'blocked':
+        memoVisibility = new BlockedMemory(
+            ownerId,
+            visibility.target.map(id => new UserAccountId(id))
+        )
+        break
+    default:
+        throw new Error(`Invalid visibility type ${ visibility.type }`)
     }
 
     return memoVisibility
