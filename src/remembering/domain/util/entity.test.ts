@@ -20,3 +20,10 @@ test('Should two entities with same class and id be equals', () => {
 
     expect(entity1.equals(entity2)).toBeTruthy()
 })
+
+test('Should two entities with same class but different ids be different', () => {
+    const entity1 = new EntityA(new EntityAId(10))
+    const entity2 = new EntityA(new EntityAId(20))
+
+    expect(entity1.equals(entity2)).toBeFalsy()
+})
