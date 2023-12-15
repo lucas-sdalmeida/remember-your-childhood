@@ -7,6 +7,6 @@ export default abstract class Entity<I extends Identifier> {
 
     equals(other: unknown) {
         if (!other || !(other instanceof Entity)) return false
-        return other.id == this.id
+        return this.id.equals(other.id)
     }
 }
