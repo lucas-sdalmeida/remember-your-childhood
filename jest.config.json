@@ -1,0 +1,37 @@
+{
+  "clearMocks": true,
+
+  "collectCoverage": true,
+  "collectCoverageFrom": [ "\\.ts" ],
+  "coverageDirectory": "./logs/coverage",
+  "coveragePathIgnorePatterns": [
+    "/node_modules/"
+  ],
+  "coverageProvider": "v8",
+  "errorOnDeprecated": true,
+  
+  "moduleDirectories": [
+    "node_modules", 
+    "src/remembering", 
+    "src/controllers",
+    "src/persistence", 
+    "src/util" 
+  ],
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "js"
+  ],
+
+  "injectGlobals": true,
+
+  "notify": true,
+  "notifyMode": "failure-change",
+
+  "preset": "ts-jest",
+
+  "roots": [
+    "./src/"
+  ]
+}
